@@ -1,0 +1,96 @@
+nodes:
+  START:
+    next: PROCESS0
+  PROCESS0:
+    func: ask_initial_questions
+    branch: plot_refine_needed
+  PLOT_REFINE:
+    func: plot_refine_dialogue
+    next: PROCESS1
+  PROCESS1:
+    func: process_1
+    next: PROCESS2
+  PROCESS2:
+    func: process_2
+    next: PROCESS3
+  PROCESS3:
+    func: process_3
+    next: PROCESS4
+  PROCESS4:
+    func: process_4
+    next: PROCESS5
+  PROCESS5:
+    func: process_5
+    next: PROCESS6
+  PROCESS6:
+    func: process_6
+    next: PROCESS7
+  PROCESS7:
+    func: process_7
+    next: PROCESS8
+  PROCESS8:
+    func: process_8
+    next: PROCESS9
+  PROCESS9:
+    func: process_9
+    next: PROCESS10
+  PROCESS10:
+    func: process_10
+    next: PROCESS11
+  PROCESS11:
+    func: process_11
+    next: PROCESS12
+  PROCESS12:
+    func: process_12
+    next: PROCESS13
+  PROCESS13:
+    func: process_13
+    next: PROCESS14
+  PROCESS14:
+    func: process_14
+    next: PROCESS15
+  PROCESS15:
+    func: process_15
+    next: PROCESS16
+  PROCESS16:
+    func: process_16
+    next: PROCESS17
+  PROCESS17:
+    func: process_17
+    next: PROCESS18
+  PROCESS18:
+    func: process_18
+    next: PROCESS19
+  PROCESS19:
+    func: process_19
+    next: PROCESS20
+  PROCESS20:
+    func: process_20
+    next: PROCESS21
+  PROCESS21:
+    func: process_21
+    next: PROCESS22
+  PROCESS22:
+    func: process_22
+    next: PROCESS23
+  PROCESS23:
+    func: process_23
+    next: PROCESS23_END
+  PROCESS23_END:
+    func: fermi_evaluate
+    branch: rewrite_needed
+  FEEDBACK:
+    func: feedback_analysis
+    next: REWRITE
+  REWRITE:
+    func: rewrite_cycle
+    next: PROCESS23_END
+    loop_max: 15
+  END: {}
+branches:
+  plot_refine_needed:
+    'yes': PLOT_REFINE
+    'no': PROCESS1
+  rewrite_needed:
+    lt90: FEEDBACK
+    gte90: END

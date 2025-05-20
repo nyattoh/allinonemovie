@@ -1,0 +1,167 @@
+# I2V（Image to Video）プロジェクト用テンプレート
+# このテンプレートは一気通貫映像プロンプトシステムの output_format_i2v: の内容を外部化したものです
+
+structure: |
+  # YAML output will follow this structure
+  # Includes prompts (embedding character and style settings) and potentially references to generated assets.
+
+  project_metadata:
+    project_name: "{{project_name | default('Untitled Project')}}"
+    purpose: "{{purpose}}"
+    target_audience: "{{target_audience}}"
+    message_emotion: "{{message_emotion}}"
+    total_segments: {{segment_count}}
+    segment_duration_seconds: {{segment_duration_seconds | default(5)}}
+    target_image_ai_model: "{{target_image_ai_model}}"
+    ai_selection_preference_used: "{{ai_selection_preference | default('quality')}}"
+    creative_review_enabled: {{enable_creative_review | default(true)}}
+    production_feedback_review_enabled: {{enable_production_feedback_review | default(true)}}
+    segment_connectivity_mode: "{{segment_connectivity_mode | default('auto')}}"
+    segment_duration_flexible: {{segment_duration_flexible | default(false)}}
+
+  ## 追加: キャラクター設定の反映 ##
+  character_settings: "{{character_settings}}"
+
+  global_settings_jp:
+    visual_style: "{{global_visual_style_jp}}"
+    color_scheme: "{{global_color_scheme_jp}}"
+    overall_mood: "{{global_overall_mood_jp}}"
+    # ... other global settings can be added as variables ...
+  global_settings_en:
+    visual_style: "{{global_visual_style_en}}"
+    color_scheme: "{{global_color_scheme_en}}"
+    overall_mood: "{{global_overall_mood_en}}"
+    # ... other global settings can be added as variables ...
+
+  ## 追加: 一貫性維持のためのメタデータ ##
+  consistency_metadata:
+    character_seed_values: "{{character_seed_values}}"
+    reference_images: "{{reference_images}}"
+    consistency_technique_used: "{{image_generation_consistency_technique | default('all')}}"
+
+  ## 追加: 可変尺モードの場合のセグメント実際の尺 ##
+  segment_durations:
+    base_duration_seconds: {{segment_duration_seconds | default(5)}}
+    is_flexible: {{segment_duration_flexible | default(false)}}
+    actual_durations: "{{segment_actual_durations | default({})}}"
+
+  segments:
+    - segment_id: 1
+      segment_details_jp: "{{segment_details_1}}"
+      segment_details_en: "{{segment_details_1_en}}"
+      start_image_jp:
+        description: "最初のフレームの説明 (キャラクター: {{character_settings.main_character.name_id}} の状態を含む)"
+        camera: "カメラ設定"
+        lighting: "照明設定"
+        subject_position: "被写体の位置と表情/ポーズ"
+        mood: "フレームの雰囲気"
+      start_image_en:
+        description: "Description of the first frame (Including state of character: {{character_settings.main_character.name_id}})"
+        camera: "Camera settings"
+        lighting: "Lighting setup"
+        subject_position: "Subject position and expression/pose"
+        mood: "Mood of the frame"
+      start_image_generation_prompt: "[Generated prompt for {{target_image_ai_model}}, including character details from {{character_settings}} and style details from {{global_visual_style_en}} etc., **with appropriate consistency parameters like --seed**]"
+      start_image_metadata:
+        seed_value: "[Seed value used or generated]"
+        style_params: "[Other style parameters used]"
+      start_image_asset_ref: "[Path or ID to the generated start image]"
+
+      end_image_jp:
+        description: "最後のフレームの説明 (キャラクター: {{character_settings.main_character.name_id}} の状態変化を含む)"
+        camera: "カメラ設定 (動きの結果)"
+        lighting: "照明設定 (変化)"
+        subject_position: "被写体の位置と表情/ポーズ (動きの結果)"
+        mood: "フレームの雰囲気"
+      end_image_en:
+        description: "Description of the last frame (Including change in state of character: {{character_settings.main_character.name_id}})"
+        camera: "Camera settings (reflecting movement)"
+        lighting: "Lighting setup (reflecting changes)"
+        subject_position: "Subject position and expression/pose (reflecting movement)"
+        mood: "Mood of the frame"
+      end_image_generation_prompt: "[Generated prompt for {{target_image_ai_model}}, including character details, consistency instructions, style details, **and specific consistency techniques: reference to start image (--iw, etc.), same seed value, etc.**]"
+      end_image_metadata:
+        seed_value: "[Same seed value as start for consistency]"
+        style_params: "[Matching style parameters]"
+        reference_image: "[Reference to start image]"
+      end_image_asset_ref: "[Path or ID to the generated end image]"
+
+      camera_movement_jp: "このセグメント中のカメラの動き"
+      camera_movement_en: "Camera movement during this segment"
+      connection_to_next_jp: "次のセグメントへの接続情報"
+      connection_to_next_en: "Connection info for the next segment"
+      actual_duration_seconds: "{{segment_actual_durations.segment_1 | default(segment_duration_seconds)}}"
+      ## 追加: 連続性情報 ##
+      continuity_mode: "独立" # または "前セグメントのエンド画像を再利用" または "連続性最適化"
+      next_segment_connection:
+        reuses_this_end_as_next_start: true/false
+        transition_technique: "カット" # または "クロスディゾルブ" または "フェード" など
+        speed_adjustment: "通常" # または "加速" または "減速" など
+
+    # ... (2つ目以降のセグメントも同様に拡張) ...
+    - segment_id: 2
+      # ... (同様のフィールド) ...
+      continuity_from_previous:
+        reuses_previous_end_as_start: true/false
+        image_reference: "segment_1_end_image" # 'reuse_end_as_start' モード時のみ設定
+      # ... (その他のフィールド) ...
+
+  advanced_visuals_jp:
+    transitions: "セグメント間の推奨トランジション手法"
+    color_progression: "映像全体の色彩の変化計画"
+    lighting_continuity: "照明の一貫性を保つための指示"
+    camera_plan_summary: "全体のカメラワーク計画の概要"
+  advanced_visuals_en:
+    transitions: "Recommended transition techniques between segments"
+    color_progression: "Color progression plan for the entire sequence"
+    lighting_continuity: "Instructions for maintaining lighting consistency"
+    camera_plan_summary: "Overview of the overall camera movement plan"
+
+  full_english_prompt_summary: |
+    # A concise (150-200 words) English prompt summarizing the entire sequence,
+    # capturing the core concept, style, mood, and key narrative points.
+    # Generated reflecting global variables and selected AI.
+    "Example: A {{segment_duration_seconds * segment_count}}-second sequence in a {{global_visual_style_en}} style..."
+
+  full_english_prompt_detailed:
+    # This section would mirror the Japanese detailed structure (global_settings, segments, advanced_visuals)
+    # but contain the fully fleshed-out English prompts reflecting global variables.
+    global_settings:
+      visual_style: "{{global_visual_style_en}}"
+      color_scheme: "{{global_color_scheme_en}}"
+      overall_mood: "{{global_overall_mood_en}}"
+      # ...
+    segments:
+      - segment_id: 1
+        details: "{{segment_details_1_en}}"
+        start_image:
+          description: "{{segments.0.start_image_en.description}}"
+          camera: "{{segments.0.start_image_en.camera}}"
+          lighting: "{{segments.0.start_image_en.lighting}}"
+          subject_position: "{{segments.0.start_image_en.subject_position}}"
+          mood: "{{segments.0.start_image_en.mood}}"
+        start_image_generation_prompt: "{{segments.0.start_image_generation_prompt}}" # Reference the generated prompt
+        end_image:
+          description: "{{segments.0.end_image_en.description}}"
+          camera: "{{segments.0.end_image_en.camera}}"
+          lighting: "{{segments.0.end_image_en.lighting}}"
+          subject_position: "{{segments.0.end_image_en.subject_position}}"
+          mood: "{{segments.0.end_image_en.mood}}"
+        end_image_generation_prompt: "{{segments.0.end_image_generation_prompt}}" # Reference the generated prompt
+        camera_movement: "{{segments.0.camera_movement_en}}"
+      # ... Repeat for all segments
+    advanced_visuals:
+      transitions: "{{advanced_visuals_en.transitions}}"
+      color_progression: "{{advanced_visuals_en.color_progression}}"
+      lighting_continuity: "{{advanced_visuals_en.lighting_continuity}}"
+      camera_plan_summary: "{{advanced_visuals_en.camera_plan_summary}}"
+
+  ## 追加: 最終生成物への参照 (例) ##
+  generated_assets:
+    image_references:
+      - segment_id: 1
+        start_image: "[Path/ID of start image 1]"
+        end_image: "[Path/ID of end image 1]"
+      # ... Repeat ...
+    video_reference: "[Path or ID to the final generated video sequence]"
+    log_file: "[Path to the generation log file]" 

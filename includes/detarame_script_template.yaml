@@ -1,0 +1,25 @@
+meta:
+  seed_id: "<SEED_ID>"        # 任意の識別子（連番や日付でもOK）
+  seed_text: "<SEED_TEXT>"    # 創作の芽になる一行メモ
+controls:
+  detarame_level: 0.7         # 0.0 = 論理的／1.0 = カオス
+  benevolence_level: 0.8      # 0.0 = 身勝手／1.0 = 善意あふれる
+  genre_flavor: ["tora-san", "paddington"]  # テイストの比率
+steps:
+  - phase: 投入
+    action: >
+      材料バケットへ <<seed_text>> をタグ無しで放り込む。
+  - phase: 煮込み
+    action: >
+      何も考えず散歩・風呂・仮眠などで脳をアイドリング。
+  - phase: 跳躍
+    action: >
+      闇鍋から立ち上る「意外な香り」を一行でメモ。  
+      detarame_level に応じて論理をわざと飛ばす。
+  - phase: 味見
+    action: >
+      プロトタイプ（例：Xポスト）で外気に晒す。  
+      リアクションを観察し、benevolence_level を微調整。
+  - phase: 継ぎ足し
+    action: >
+      反応の良かった要素だけ次の鍋へストックし、seed_id を更新。

@@ -1,0 +1,84 @@
+project_metadata:
+  project_name: ""
+  creator: ""
+  creation_date: ""
+  video_duration: ""
+  target_ai_model: ""  # Gen-2 / Pika / その他
+
+global_settings:
+  style: ""
+  resolution: ""
+  frame_rate: ""
+  color_palette: ""
+  aspect_ratio: ""
+
+characters:
+  character1:
+    name: ""
+    appearance: ""
+    costume: ""
+    expression: ""
+    movement: ""
+
+  character2:
+    name: ""
+    appearance: ""
+    costume: ""
+    expression: ""
+    movement: ""
+
+segments:
+  segment1:
+    segment_id: 1
+    segment_title: "タイトル"
+    time_sections:
+      - time_range: "0-1秒"
+        video: "説明"
+        audio:
+          sfx: "効果音"
+          bgm: "BGM説明"
+          dialogue: "キャラ名:「セリフ」"
+        camera: "カメラワーク"
+        lighting: "照明設定"
+        acting: "演技説明"
+
+      - time_range: "1-2秒"
+        video: "説明"
+        audio:
+          sfx: "効果音"
+          bgm: "BGM説明"
+          dialogue: "キャラ名:「セリフ」"
+        camera: "カメラワーク"
+        lighting: "照明設定"
+        acting: "演技説明"
+
+  segment2:
+    segment_id: 2
+    segment_title: "タイトル"
+    time_sections:
+      - time_range: "2-3秒"
+        video: "説明"
+        audio:
+          sfx: "効果音"
+          bgm: "BGM説明"
+          dialogue: "キャラ名:「セリフ」"
+        camera: "カメラワーク"
+        lighting: "照明設定"
+        acting: "演技説明"
+
+advanced_effects:
+  transitions: ""
+  special_effects: ""
+  motion_graphics: ""
+
+summary_prompts:
+  japanese: |
+    [ここに日本語の全体プロンプトを記述]
+
+  english: |
+    [Here, write the complete prompt in English]
+
+detarame_elements:
+  - element1: "[どのように映像に反映されるか]"
+  - element2: "[どのように映像に反映されるか]"
+  - element3: "[どのように映像に反映されるか]" 

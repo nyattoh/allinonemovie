@@ -1,0 +1,141 @@
+# movie_prompt_template.yaml
+# 映像プロンプト統合テンプレート
+# 日本語・英語両対応。1秒/0.1秒単位の柔軟なtime_range、音響（SFX/BGM/Dialogue）対応。
+
+project_metadata:
+  project_name: "サンプルプロジェクト名 / Sample Project Name"
+  purpose: "この映像プロジェクトの目的 / Purpose of this video project"
+  target_audience: "ターゲット視聴者 / Target audience"
+  message_emotion: "伝えたい感情 / Intended emotion"
+  total_segments: 2  # セグメント数
+  segment_duration_seconds: 5  # 各セグメントの基本尺（秒）
+  target_image_ai_model: "StableDiffusionXL"
+  ai_selection_preference_used: "quality"
+  creative_review_enabled: true
+  production_feedback_review_enabled: true
+  segment_connectivity_mode: "auto"
+  segment_duration_flexible: false
+
+character_settings:
+  main_character:
+    name: "ゴジニャ / Gojinya"
+    description_jp: "ゴジラの背びれを持つ黒猫。"
+    description_en: "A cute black cat with Godzilla-like dorsal fins."
+    fur_texture: "ふわふわ / Fluffy"
+    eyes: "大きくて丸い / Big and round"
+    dorsal_fins: "青白く光る / Glowing bluish-white"
+    expression: "好奇心旺盛 / Curious"
+  # 他キャラクターも同様に追加可
+
+global_settings:
+  visual_style_jp: "シネマティック、夢幻的"
+  visual_style_en: "Cinematic, dreamy"
+  color_scheme_jp: "朝焼けの暖色系"
+  color_scheme_en: "Warm sunrise tones"
+  overall_mood_jp: "希望に満ちた"
+  overall_mood_en: "Hopeful"
+  cinematography: "ローアングル、ドローン俯瞰"
+  effects: "光の粒子、ソフトフォーカス"
+
+consistency_metadata:
+  character_seed_values: "main:12345"
+  reference_images:
+    - "ref_images/gojinya_pose1.png"
+    - "ref_images/gojinya_pose2.png"
+  consistency_technique_used: "all"
+
+segments:
+  - segment_id: 1
+    segment_title: "オープニング / Opening"
+    segment_details_jp: "主人公が雲の上で目覚めるシーン。"
+    segment_details_en: "Opening scene where the protagonist wakes up above the clouds."
+    start_image:
+      description_jp: "雲の上で眠るゴジニャのアップ。"
+      description_en: "Close-up of Gojinya sleeping above the clouds."
+      camera: "固定カメラ / Static camera"
+      lighting: "朝日が差し込む / Morning sunlight"
+      subject_position: "画面中央で丸くなっている / Curled up in the center"
+      mood: "静かで幻想的 / Quiet and fantastic"
+    end_image:
+      description_jp: "ゴジニャが目を覚まし、空を見上げる。"
+      description_en: "Gojinya wakes up and looks up at the sky."
+      camera: "ゆっくりズームアウト / Slow zoom out"
+      lighting: "光が強くなる / Increasing light"
+      subject_position: "体を伸ばして空を見上げる / Stretching and looking up"
+      mood: "希望に満ちた / Hopeful"
+    camera_movement_jp: "固定からズームアウト"
+    camera_movement_en: "Static to zoom out"
+    continuity_mode: "独立"
+    connection_to_next:
+      reuses_this_end_as_next_start: false
+      transition_technique: "カット / Cut"
+      speed_adjustment: "通常 / Normal"
+    breakdown_by_time:
+      # time_rangeは1秒単位が基本ですが、0.1秒単位や任意の範囲も指定可能です。
+      - time_range: "0-1s"
+        video: "ゴジニャが眠っている。"
+        audio:
+          sfx: "風の音"
+          bgm: "静かなピアノ"
+          dialogue: "（なし）"
+        camera: "固定カメラ"
+        lighting: "朝日が差し込む"
+        acting: "寝息を立てている"
+      - time_range: "1.0-1.2s"
+        video: "ゴジニャが目を開ける。"
+        audio:
+          sfx: "まばたきの音"
+          bgm: "ピアノ継続"
+          dialogue: "（ゴジニャ）『ん…？』"
+        camera: "ゆっくりズームアウト"
+        lighting: "光が強くなる"
+        acting: "ゆっくりと目を開ける"
+    actual_duration_seconds: 5
+
+  - segment_id: 2
+    segment_title: "空中散歩 / Sky Walk"
+    segment_details_jp: "ゴジニャが雲の上を歩き始める。"
+    segment_details_en: "Gojinya starts walking above the clouds."
+    # ...（同様に記述）...
+    breakdown_by_time:
+      - time_range: "0-1s"
+        video: "ゴジニャが立ち上がる。"
+        audio:
+          sfx: "足音"
+          bgm: "明るいストリングス"
+          dialogue: "（ゴジニャ）『行こう！』"
+        camera: "ローアングル"
+        lighting: "朝日が強くなる"
+        acting: "元気よく立ち上がる"
+      - time_range: "1-2s"
+        video: "ゴジニャが雲の上を歩き始める。"
+        audio:
+          sfx: "足音"
+          bgm: "明るいストリングス"
+          dialogue: "るんるん"
+        camera: "ローアングル"
+        lighting: "朝日が強くなる"
+        acting: "元気よく歩く"
+    actual_duration_seconds: 5
+    # ...（actual_duration_secondsまで同様に記述）...
+
+advanced_visuals:
+  transitions: "カット、クロスディゾルブなど / Cut, cross dissolve, etc."
+  color_progression: "朝焼け→昼の青空 / Sunrise to daytime blue sky"
+  lighting_continuity: "全体を通して柔らかい光を維持 / Maintain soft light throughout"
+  camera_plan_summary: "ズームアウトとローアングルを組み合わせる / Combine zoom out and low angle shots"
+
+generated_assets:
+  image_references:
+    - segment_id: 1
+      start_image: "assets/seg1_start.png"
+      end_image: "assets/seg1_end.png"
+    - segment_id: 2
+      start_image: "assets/seg2_start.png"
+      end_image: "assets/seg2_end.png"
+  video_reference: "assets/final_movie.mp4"
+  log_file: "logs/generation.log"
+
+full_prompt_summary:
+  jp: "全体の要約プロンプト（日本語）。例：ゴジニャが雲の上で目覚め、空を歩き始める5秒間の幻想的な映像。"
+  en: "Full summary prompt (English). Example: A 5-second dreamy sequence where Gojinya wakes up above the clouds and starts walking." 

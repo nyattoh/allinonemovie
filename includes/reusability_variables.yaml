@@ -1,0 +1,59 @@
+- name: "{{purpose}}, {{target_audience}}, {{message_emotion}}, {{segment_count}}, {{segment_details}}"
+  description: "初期ヒアリング項目。映像の基本コンセプトを定義します。"
+- name: "{{character_settings}}"
+  description: "主要キャラクターの設定（外見、服装、名前/IDなど）。YAMLマップ形式で記述します。この設定は全ての画像生成プロンプトに反映されます。"
+  example: |
+    main_character:
+      name_id: "Sora"
+      description_jp: "青い髪で活発な表情の若い女性。白いTシャツとジーンズを着ている。"
+      description_en: "Young woman with blue hair and an energetic expression, wearing a white T-shirt and jeans."
+      keywords: ["blue hair", "white t-shirt", "jeans", "energetic expression"]
+- name: "{{segment_duration_seconds | default(5)}}"
+  description: "各映像セグメントの基本尺（秒）。デフォルトは5秒です。"
+- name: "{{project_name}}"
+  description: "プロジェクト名。"
+- name: "{{target_image_ai_model}}"
+  description: "画像生成に使用するAIモデル名 (例: Midjourney v6)。**ステータス監視と要求に基づき自動選定**されるか、ユーザーが直接指定します。空欄の場合は自動選定が試みられます。"
+- name: "{{global_visual_style_jp | default('シネマティック')}}"
+  description: "映像全体の視覚スタイル（日本語）。デフォルトは「シネマティック」です。変更する場合は reference_resources を参照してください。"
+- name: "{{global_visual_style_en | default('Cinematic')}}"
+  description: "映像全体の視覚スタイル（英語）。デフォルトは「Cinematic」です。"
+- name: "{{global_color_scheme_jp}}, {{global_color_scheme_en}}"
+  description: "映像全体のカラースキーム（日本語/英語）。任意項目。空欄の場合、他の入力から推測を試みます。指定する場合は reference_resources を参照してください。"
+- name: "{{global_overall_mood_jp}}, {{global_overall_mood_en}}"
+  description: "映像全体の雰囲気（日本語/英語）。任意項目。空欄の場合、他の入力から推測を試みます。"
+- name: "{{enable_creative_review | default(true)}}"
+  description: "映像演出チームによるクリエイティブレビューを実施するか (true/false)。デフォルトは true です。"
+- name: "{{enable_production_feedback_review | default(true)}}"
+  description: "プロダクション＆フィードバックチームによるレビューを実施するか (true/false)。デフォルトは true です。"
+- name: "{{ai_status_endpoint_urls | default([{'ai_model': 'kamui.ai', 'url': 'https://www.kamui.ai/ja/api-status'}])}}"
+  description: "監視対象AIのステータス情報取得APIエンドポイントURLのリスト (YAMLリスト形式)。デフォルトは kamui.ai のステータスURLです。"
+  example: |
+    [
+      {"ai_model": "kamui.ai", "url": "https://www.kamui.ai/ja/api-status"},
+      {"ai_model": "Midjourney", "url": "https://status.midjourney.com/api/v2/status.json"}
+    ]
+- name: "{{ai_selection_preference | default('quality')}}"
+  description: "AI選定時の優先度 ('quality', 'speed', 'cost', 'balance' など)。デフォルトは 'quality' です。"
+- name: "{{image_generation_consistency_technique | default('all')}}"
+  description: "画像間で一貫性を保つための技術手法。'seed'(シード値共有), 'reference_image'(参照画像), 'character_detail'(詳細記述), 'all'(全手法) から選択。デフォルトは 'all' です。"
+- name: "{{character_seed_values}}"
+  description: "各キャラクターのシード値を保存する変数。最初のキャラクター生成時に取得し、後続の生成で再利用します。"
+  example: |
+    main_character: "1234567890"
+    secondary_character: "9876543210"
+- name: "{{reference_images}}"
+  description: "前の画像生成結果へのURI/パスを保存する変数。次の生成の参照イメージとして使用します。"
+  example: |
+    main_character_reference: "midjourney://123456789"
+    scene_reference: "local/path/to/image.jpg"
+- name: "{{segment_connectivity_mode | default('auto')}}"
+  description: "セグメント間の接続モード。'auto' (自動判断), 'independent' (独立画像), 'reuse_end_as_start' (前のセグメントのエンド画像を次のスタート画像として再利用), 'consistent_flow' (連続性を重視) から選択。デフォルトは 'auto' です。"
+- name: "{{segment_duration_flexible | default(false)}}"
+  description: "セグメント尺を内容に応じて柔軟に調整するかどうか。true: 柔軟に調整, false: 固定尺({{segment_duration_seconds}}秒)。デフォルトは false です。"
+- name: "{{segment_actual_durations}}"
+  description: "内容に応じて調整された各セグメントの実際の尺（秒）を格納します。柔軟モード({{segment_duration_flexible}}=true)時のみ使用。"
+  example: |
+    segment_1: 7
+    segment_2: 3
+    segment_3: 5 

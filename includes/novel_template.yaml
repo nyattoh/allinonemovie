@@ -1,0 +1,49 @@
+metadata:
+  title: ""
+  genre: ""
+  theme: ""
+  target_audience: ""
+  target_duration: ""
+
+story_structure:
+  prologue: |
+    （ここに物語の導入部を書きます）
+
+  chapter1: |
+    （ここに第1章を書きます）
+
+  chapter2: |
+    （ここに第2章を書きます）
+
+  chapter3: |
+    （ここに第3章を書きます）
+
+  epilogue: |
+    （ここに物語の結末を書きます）
+
+characters:
+  protagonist:
+    name: ""
+    age: ""
+    appearance: ""
+    personality: ""
+    background: ""
+    goal: ""
+    internal_conflict: ""
+
+  sub_character1:
+    name: ""
+    relation_to_protagonist: ""
+    role: ""
+
+  sub_character2:
+    name: ""
+    relation_to_protagonist: ""
+    role: ""
+
+world_setting: |
+  （ここに物語の舞台となる世界観を書きます）
+
+notes:
+  visual_adaptation: ""
+  detarame_elements: "" 

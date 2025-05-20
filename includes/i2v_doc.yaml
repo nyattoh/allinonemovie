@@ -1,0 +1,148 @@
+models:
+  amt_interpolation:
+    name: "AMT Interpolation"
+    description: "画像から動画を生成するAIモデル"
+    documentation:
+      sources:
+        - "論文"
+        - "GitHubリポジトリ"
+        - "開発者ブログ"
+
+    prompt_guide:
+      guidelines:
+        - "明確かつ簡潔な指示"
+        - "具体的な詳細"
+        - "キーワードの使用"
+        - "ネガティブプロンプト"
+
+    parameters:
+      - name: "フレームレート"
+        description: "動画の滑らかさを制御"
+      - name: "解像度"
+        description: "動画の細かさを制御"
+      - name: "ノイズ除去"
+        description: "動画のノイズを除去"
+      - name: "補間強度"
+        description: "フレーム間の補間強度を制御"
+
+    best_practices:
+      - "高品質な入力画像"
+      - "適切なプロンプト"
+      - "パラメータの調整"
+      - "実験"
+
+    use_cases:
+      - "風景動画の生成"
+      - "アニメーションの作成"
+      - "特殊効果の追加"
+      - "古い写真の復元"
+
+  cogvideo_x5b:
+    name: "CogVideoX-5B"
+    description: "清華大学の研究チームが開発した大規模なテキストから動画生成モデル"
+    documentation:
+      paper: "https://arxiv.org/abs/2205.15868"
+      github: "非公開"
+      project_page: "未公開"
+
+    prompt_guide:
+      guidelines:
+        - "明確かつ具体的な記述"
+        - "キーワードの活用"
+        - "スタイルの指定"
+        - "ネガティブプロンプトの活用"
+      examples:
+        - "A samurai walking through a bamboo forest, cinematic lighting, detailed environment"
+        - "A cat playing with a ball of yarn, cute, cartoon style"
+        - "A futuristic city at night, neon lights, flying cars"
+
+    parameters:
+      - name: "生成ステップ数"
+        description: "動画の品質を制御"
+      - name: "解像度"
+        description: "動画の解像度を指定"
+      - name: "フレームレート"
+        description: "動画のフレームレートを指定"
+      - name: "シード値"
+        description: "乱数シードを指定"
+
+    best_practices:
+      - "プロンプトの試行錯誤"
+      - "パラメータの調整"
+      - "生成結果の分析"
+      - "コミュニティの活用"
+
+    use_cases:
+      - "エンターテイメント"
+      - "教育"
+      - "広告"
+      - "研究"
+
+    updates:
+      sources:
+        - "研究チームのウェブサイト"
+        - "論文"
+        - "ニュース記事"
+        - "ソーシャルメディア"
+
+  fast_svd_lcm:
+    name: "Fast SVD LCM"
+    description: "画像から動画を生成するAIモデル"
+    documentation:
+      sources:
+        - "論文"
+        - "GitHubリポジトリ"
+        - "コミュニティフォーラム"
+
+    prompt_guide:
+      guidelines:
+        - "明確かつ具体的な指示"
+        - "キーワードの活用"
+        - "ネガティブプロンプトの使用"
+
+    parameters:
+      - name: "フレームレート"
+        description: "動画の滑らかさを制御"
+      - name: "解像度"
+        description: "動画の細かさを制御"
+      - name: "生成ステップ数"
+        description: "動画の品質を制御"
+      - name: "シード値"
+        description: "乱数シードを指定"
+
+    best_practices:
+      - "実験と調整"
+      - "リソースの最適化"
+      - "コミュニティとの連携"
+
+    use_cases:
+      example:
+        prompt: "夕焼けのビーチでサーフィンをする犬の動画"
+        parameters:
+          frame_rate: "30 fps"
+          resolution: "1280x720"
+          steps: 50
+
+    updates:
+      sources:
+        - "公式ウェブサイト"
+        - "ソーシャルメディア"
+        - "ニュースレター"
+
+  hunyuan_video:
+    name: "Hunyuan Video"
+    description: "テンセントが開発した画像から動画を生成するAIモデル"
+    documentation:
+      sources:
+        - "テンセントクラウド公式ウェブサイト"
+        - "テンセント技術ブログ"
+
+    prompt_guide:
+      guidelines:
+        - "詳細な説明"
+        - "キーワードの利用"
+        - "ネガティブプロンプト"
+        - "スタイルの指定"
+      examples:
+        - "A cat playing with a ball of yarn in a sunny living room, Pixar style."
+        - "A futuristic cityscape at night, neon lights, flying cars, Blade Runner style." 

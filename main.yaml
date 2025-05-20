@@ -1,0 +1,83 @@
+# cursor-video-orchestrator/main.yml
+
+meta:
+  project: "Video Orchestration via YAML only"
+  version: 0.2.0
+  description: |
+    Cursor 上で *この YAML だけ* を編集すれば、映像／画像／脚本生成まで一気通貫で走る構造。
+    すべてのドキュメントは **YAML** に統一（Markdown 依存ゼロ）。
+
+# -------------------------------------------------------------------
+#  インクルードのルートフォルダ
+# -------------------------------------------------------------------
+includes:
+  - path: includes/
+    description: "!include で参照されるサブ YAML 集 (旧 .md も .yaml 化済み)"
+
+# -------------------------------------------------------------------
+#  システムプロンプト
+# -------------------------------------------------------------------
+system_prompt:
+  purpose: |
+    高品質な動画・画像・脚本を一貫して管理し、複数 AI モデル／複数ペルソナ間の
+    連続性を自動維持するワークフレーム。
+  background: |
+    ユーザーは専門的知識がなくても良い。AI ごとの特性・制約を考慮しつつ最適な
+    プロンプトと実行パラメータを自動生成する。
+
+# -------------------------------------------------------------------
+#  動的ナレッジベース (最新の AI プロンプト Tips を随時取得)
+# -------------------------------------------------------------------
+knowledge_retrieval:
+  description: |
+    画像／動画生成時に **対象 AI モデル名** をキーに Web 検索し、
+    公式ドキュメント・最新 Tips の要点を scrapbox 風 YAML に保存。
+    生成エージェントは常に本データを参照してプロンプト最適化を行う。
+  cache_folder: includes/ai_prompt_tips/
+  query_template: |
+    "{model_name} best prompt parameters site:official.com OR site:docs.*"
+
+# -------------------------------------------------------------------
+#  ワークフロー定義 (簡潔化)
+# -------------------------------------------------------------------
+execution_flow: !include includes/workflow_process.yaml
+agents:        !include includes/agents_definition.yaml
+variables:     !include includes/reusability_variables.yaml
+
+# -------------------------------------------------------------------
+#  小説 / 脚本 生成用パラレルキャラバン設定
+# -------------------------------------------------------------------
+writing_pipeline:
+  persona_generator:
+    count: 10              # 10 ペルソナを Cursor Agent で生成
+    template: persona_writer_template  # agents_definition.yaml で定義
+  parallel_caravan:
+    concurrency: 10        # 同時実行数（Cursor Agent キュー）
+    description: |
+      10 ペルソナがプロットを並列執筆し、それぞれ異なる文体・構文を試行。
+  scoring:
+    metrics: [coherence, creativity, pacing]
+    top_k: 3
+  output:
+    create_folder: true
+    folder_prefix: drafts_
+    filename_pattern: persona{{id}}.md
+
+# === デフォルト I/O テンプレ ===
+output_format:
+  i2v_template: includes/image2video_prompt_template.yaml
+  t2v_template: includes/text2video_prompt_template.yaml
+
+  i2v_template: includes/image2video_prompt_template.yaml
+  t2v_template: includes/text2video_prompt_template.yaml
+
+# -------------------------------------------------------------------
+#  ランナー設定
+# -------------------------------------------------------------------
+runner:
+  script: run_pipeline.py
+  entry:  main
+  notes: |
+    - run_pipeline.py は !include 展開 → knowledge_fetch → エージェント実行 → scoring →
+      output フォルダ生成 まで一括実行する。
+    - 追加ライブラリ: requests, beautifulsoup4 (knowledge_fetch 用)

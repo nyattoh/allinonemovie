@@ -1,0 +1,81 @@
+metadata:
+  title: ""
+  genre: ""
+  duration: ""
+  original_work: ""  # ある場合は記載
+
+characters:
+  - name: ""
+    description: ""
+  - name: ""
+    description: ""
+  - name: ""
+    description: ""
+
+scenes:
+  scene1:
+    location: "INT./EXT. [場所] - [時間帯]"
+    description: "[シーンの説明]"
+    dialogue:
+      - character: "[キャラ名]"
+        line: "「セリフ」"
+    sound_effects:
+      - description: "[効果音の説明]"
+    music:
+      - description: "♪ [音楽の説明]"
+    directives:
+      scene_id: SC1
+      camera: "[カメラワーク]"
+      lighting: "[照明設定]"
+      sfx: "[効果音詳細]"
+      bgm: "[BGM詳細]"
+      vfx: "[視覚効果詳細]"
+
+  scene2:
+    location: "INT./EXT. [場所] - [時間帯]"
+    description: "[シーンの説明]"
+    dialogue:
+      - character: "[キャラ名]"
+        line: "「セリフ」"
+    sound_effects:
+      - description: "[効果音の説明]"
+    music:
+      - description: "♪ [音楽の説明]"
+    directives:
+      scene_id: SC2
+      camera: "[カメラワーク]"
+      lighting: "[照明設定]"
+      sfx: "[効果音詳細]"
+      bgm: "[BGM詳細]"
+      vfx: "[視覚効果詳細]"
+
+  scene3:
+    location: "INT./EXT. [場所] - [時間帯]"
+    description: "[シーンの説明]"
+    dialogue:
+      - character: "[キャラ名]"
+        line: "「セリフ」"
+    sound_effects:
+      - description: "[効果音の説明]"
+    music:
+      - description: "♪ [音楽の説明]"
+    directives:
+      scene_id: SC3
+      camera: "[カメラワーク]"
+      lighting: "[照明設定]"
+      sfx: "[効果音詳細]"
+      bgm: "[BGM詳細]"
+      vfx: "[視覚効果詳細]"
+
+video_prompt_notes:
+  - scene: "シーン1 (0-Xs)"
+    hint: "[映像プロンプト変換のヒント]"
+  - scene: "シーン2 (X-Ys)"
+    hint: "[映像プロンプト変換のヒント]"
+  - scene: "シーン3 (Y-Zs)"
+    hint: "[映像プロンプト変換のヒント]"
+
+detarame_elements:
+  - "[意外性/跳躍的アイデア1]"
+  - "[意外性/跳躍的アイデア2]"
+  - "[意外性/跳躍的アイデア3]" 

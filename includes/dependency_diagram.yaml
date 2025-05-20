@@ -1,0 +1,58 @@
+dependency_diagram: |
+  ```mermaid
+  graph TD
+      UserInput[ユーザー入力<br/>(Variables:<br/>purpose, audience,<br/>message, count,<br/>details, duration,<br/>project_name,<br/>ai_status_urls, etc.)] --> MA(管理エージェント);
+      CharSettings[キャラクター設定<br/>({{character_settings}})] --> MA;
+      ConsistencyTech[一貫性技術<br/>({{image_generation_consistency_technique}})] --> MA; 
+      Settings[設定変数<br/>enable_reviews,<br/>ai_selection_preference] --> MA;
+      KB[(参照情報<br/>ナレッジベース<br/>+ AI Doc Links)] --> MA; KB --> VPA; KB --> SEA; KB --> IGPA; KB --> BPA; KB --> VGPA;
+
+      subgraph AI_Selection
+          MA --> ASMA(AIステータス監視Agent); ASMA --> MA;
+          MA --> SelectedAI{決定: {{target_image_ai_model}}};
+      end
+
+      SelectedAI --> OfficialDocs{Target AI<br/>Official Docs}; OfficialDocs --> IGPA; OfficialDocs --> VGPA;
+      OfficialDocs --> ICTA(画像一貫性<br/>追跡Agent);
+
+      subgraph PromptGenerationLoop
+          MA --> VPA; MA --> SEA;
+          CharSettings --> SEA;
+          SEA --> IGPA;
+          CharSettings --> IGPA;
+          ConsistencyTech --> ICTA;
+          ICTA -- 一貫性<br/>パラメータ提案 --> IGPA;
+          SelectedAI --> IGPA;
+
+          VPA --> ReviewDecision{レビュー判断};
+          SEA --> ReviewDecision;
+          IGPA --> ReviewDecision;
+
+          ReviewDecision -- Creative? --> CreativeReview --> MA_ReviewFB{FB統合/修正指示};
+          ReviewDecision -- Prod/FB? --> ProdFeedbackReview --> MA_ReviewFB;
+          ReviewDecision -- Skip --> Approval{承認};
+          MA_ReviewFB --> VPA; MA_ReviewFB --> SEA; MA_ReviewFB --> IGPA;
+          VPA --> ReviewDecision; SEA --> ReviewDecision; IGPA --> ReviewDecision; # Loop
+          MA_ReviewFB --> Approval;
+      end
+
+      Approval --> BPA;
+      BPA --> MA_ExecPrep{実行準備};
+      IGPA -- Approved Img Prompts (with Char Info) --> MA_ExecPrep;
+
+      subgraph Execution
+          MA_ExecPrep -- Img Gen Instruct --> ImgGenTool[/画像生成<br/>ツール/API<br/>({{target_image_ai_model}})/];
+          ImgGenTool -- Generated Images --> ICTA;
+          ICTA -- メタデータ保存<br/>(シード値/参照画像) --> MetaStore[(一貫性<br/>メタデータ<br/>ストア)];
+          MetaStore -- シード値/参照画像 --> IGPA;
+          ImgGenTool -- Generated Images --> MA_VidPrep{動画生成準備};
+          BPA -- Approved Vid Prompts --> MA_VidPrep; # 全体プロンプトも使用
+          MA_VidPrep -- Vid Gen Prompt --> VGPA;
+          VGPA -- Optimized Video Prompt --> VidGenTool[/動画生成<br/>ツール/API/];
+          MA_VidPrep -- Vid Gen Instruct --> VidGenTool;
+          VidGenTool -- Generated Video --> MA_Final{最終確認};
+      end
+
+      MA_Final --> FinalOutput(最終成果物<br/>YAML+Asset Info);
+
+  ``` 

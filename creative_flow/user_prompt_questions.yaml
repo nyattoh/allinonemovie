@@ -1,0 +1,120 @@
+- question_jp: |
+    1. この映像シーケンスの主な目的は何ですか？
+       (例: 製品紹介, ブランドイメージ向上, 物語の一部, 実験的アート)
+  variable: "{{purpose}}"
+  type: free_text_with_examples
+- question_jp: |
+    2. 主要な登場キャラクターについて教えてください。
+       (簡潔に説明するだけで大丈夫です。AIが自動的に詳細なキャラクター設定を構築します)
+       例: 「青い髪で元気な20代の女性キャラクター、白いTシャツとジーンズを着ている」
+       例: 「スーツを着た40代のビジネスマン、少し疲れた表情だが、誠実な印象」
+  variable: "{{character_description}}"
+  type: free_text_with_examples
+  note: "この説明から管理エージェントが自動的に `{{character_settings}}` を詳細なYAML形式で構築します"
+- question_jp: |
+    3. 想定される視聴者層は誰ですか？
+       (例: 若年層, 特定の趣味を持つ人々, ビジネス関係者, 一般消費者)
+  variable: "{{target_audience}}"
+  type: free_text_with_examples
+- question_jp: |
+    4. キャラクターの一貫性を保つための技術手法を選択してください (デフォルト: all)
+       1: all (全ての利用可能な手法を組み合わせる)
+       2: seed (シード値の保存と再利用)
+       3: reference_image (生成画像の参照画像としての使用)
+       4: character_detail (超詳細なキャラクター特徴記述)
+  variable: "{{image_generation_consistency_technique | default('all')}}"
+  type: single_choice_or_free_text
+  options: ["all", "seed", "reference_image", "character_detail"]
+  default_choice: "1"
+- question_jp: |
+    5. 伝えたい中心的なメッセージや感情は何ですか？
+       (例: ワクワク感と冒険心, 静寂と内省, 感動と共感, 不安と希望)
+  variable: "{{message_emotion}}"
+  type: free_text_with_examples
+- question_jp: |
+    6. 映像は何個の {{segment_duration_seconds | default(5)}} 秒セグメントで構成されますか？ (半角数字で入力)
+  variable: "{{segment_count}}"
+  type: number
+- question_jp: |
+    7. 各セグメントの基本的な内容や展開を教えてください。
+       (セグメント {{segment_count}} 個分。キャラクターの状態変化も意識して記述)
+  variable: "{{segment_details}}"
+  type: free_text_multiline
+- question_jp: |
+    8. 全体の視覚スタイルは？ (デフォルト: シネマティック)
+       (例: アニメ - 2D, イラストレーション - 水彩画風 などに変更可能)
+       ※ 変更する場合は `reference_resources` を参照してください。
+       **※ ここで設定されたスタイルは、生成される全ての画像に一貫して適用されます。**
+  variable: "{{global_visual_style_jp | default('シネマティック')}}"
+  variable_en: "{{global_visual_style_en | default('Cinematic')}}"
+  type: free_text_with_reference_and_default
+- question_jp: |
+    9. (任意) 全体のカラースキームは？ (空欄の場合、文脈から推測します)
+       (例: 暖色系, 鮮やか / 寒色系, 落ち着いた)
+       ※ 指定する場合は `reference_resources` を参照してください。
+  variable: "{{global_color_scheme_jp}}"
+  variable_en: "{{global_color_scheme_en}}"
+  type: optional_free_text_with_reference
+- question_jp: |
+    10. (任意) 全体の雰囲気は？ (空欄の場合、文脈から推測します)
+       (例: 壮大で感動的, 静かで神秘的, 明るく楽しい)
+  variable: "{{global_overall_mood_jp}}"
+  variable_en: "{{global_overall_mood_en}}"
+  type: optional_free_text_with_examples
+- question_jp: |
+    11. 画像生成AI選定の優先度は？ (デフォルト: 1 品質)
+       1: 品質 (Quality)
+       2: 速度 (Speed)
+       3: コスト (Cost) - (利用可能な場合)
+       4: バランス (Balance)
+       5: その他 (具体的に記述)
+  variable: "{{ai_selection_preference | default('quality')}}"
+  type: single_choice_or_free_text
+  options: ["quality", "speed", "cost", "balance"]
+  default_choice: "1"
+- question_jp: |
+    12. (任意) 監視対象のAIステータスURLは？ (空欄でデフォルトを使用)
+        デフォルト: [{"ai_model": "kamui.ai", "url": "https://www.kamui.ai/ja/api-status"}] # cite: https://www.kamui.ai/ja/api-status
+        例 (追加する場合): , {"ai_model": "Midjourney", "url": "..."}]
+  variable: "{{ai_status_endpoint_urls | default([{'ai_model': 'kamui.ai', 'url': 'https://www.kamui.ai/ja/api-status'}])}}"
+  type: optional_free_text_yaml_list_or_empty
+- question_jp: |
+    13. (任意) 特定の画像生成AIモデルを使いたい場合は指定してください。
+        (空欄の場合は、ステータスと優先度に基づき自動選定します)
+        (例: Midjourney v6, Stable Diffusion XL)
+  variable: "{{target_image_ai_model}}"
+  type: free_text_or_empty
+- question_jp: |
+    14. 専門家レビューを実施しますか？ (デフォルト: 1 両方実施)
+        1: 両方実施する (true, true)
+        2: クリエイティブレビューのみ実施 (true, false)
+        3: プロダクション/FBレビューのみ実施 (false, true)
+        4: 両方実施しない (false, false)
+  variables: ["{{enable_creative_review | default(true)}}", "{{enable_production_feedback_review | default(true)}}"]
+  type: multiple_choice_boolean_pair
+  options_map:
+    "1": [true, true]
+    "2": [true, false]
+    "3": [false, true]
+    "4": [false, false]
+  default_choice: "1"
+- question_jp: |
+    15. セグメント尺を内容に応じて柔軟に調整しますか？ (デフォルト: 2 固定尺)
+        1: 柔軟に調整する (内容が多いセグメントは長く、少ないセグメントは短く)
+        2: 固定尺を使用する (全セグメント {{segment_duration_seconds | default(5)}} 秒)
+  variable: "{{segment_duration_flexible | default(false)}}"
+  type: boolean_choice
+  options_map:
+    "1": true
+    "2": false
+  default_choice: "2"
+- question_jp: |
+    16. セグメント間の接続方法を選択してください。 (デフォルト: 1 自動判断)
+        1: 自動判断 (内容に応じて最適な方法を選択)
+        2: 独立画像 (各セグメントのスタート/エンド画像を個別に生成)
+        3: エンド画像再利用 (前のセグメントのエンド画像を次のスタート画像として再利用)
+        4: 連続性重視 (セグメント間の連続性が最大になるよう最適化)
+  variable: "{{segment_connectivity_mode | default('auto')}}"
+  type: single_choice
+  options: ["auto", "independent", "reuse_end_as_start", "consistent_flow"]
+  default_choice: "1" 

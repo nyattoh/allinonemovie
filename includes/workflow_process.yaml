@@ -1,0 +1,63 @@
+- 1_initial_hearing: 管理エージェントがユーザーから基本情報ヒアリング
+- 2_character_setup:
+    tasks:
+      - 管理エージェントがユーザーの簡潔なキャラクター説明を基に、詳細なYAML形式のキャラクター設定 (`{{character_settings}}`) を自動生成
+      - キャラクターの外見、服装、名前/ID、特徴を体系化し、英語と日本語の両方で詳細に記述
+      - キャラクターの特徴をAI画像生成に最適化されたキーワードリストとして整理
+- 3_ai_status_check: AIステータス監視エージェントが `{{ai_status_endpoint_urls}}` からステータスを取得
+- 4_initial_drafting:
+    tasks:
+      - 映像プロンプトエージェントが全体構成案を作成
+      - スタートエンド画像描写エージェントが各セグメント描写案を作成
+      - セグメント尺管理エージェントが、{{segment_duration_flexible}}=true の場合、各セグメントの最適尺を評価し `{{segment_actual_durations}}` に格納
+- 5_segment_connectivity_optimization:
+    tasks:
+      - "{{ segment_connectivity_mode }} に基づき連続性の最適化":
+          reuse_end_as_start: "前のセグメントのエンド画像を次のセグメントのスタート画像として再利用するよう設定"
+          consistent_flow:   "セグメント間の連続性が最大になるよう各セグメントの描写を調整"
+          auto:              "内容に応じて最適な連続性方法を自動選択"
+- 6_image_prompt_generation:
+    tasks:
+      - "画像生成プロンプトエージェントが、描写案と選定された AI の公式ドキュメントに基づきプロンプト案を作成"
+      - "画像一貫性追跡エージェントが、選定された AI モデルに最適な一貫性維持技術を推奨"
+      - >
+        'reuse_end_as_start' モード時は、
+        2 つ目以降のセグメントのスタート画像プロンプトを生成せず、
+        前セグメントのエンド画像を再利用するよう指示を出力
+- 7_expert_review_creative:
+    enabled: "{{enable_creative_review}}"
+    tasks:
+      - 映像演出チームがレビューし、改善提案
+- 8_revision_1:
+    tasks:
+      - 管理エージェントがFB(あれば)に基づき、担当エージェントに修正指示。エージェントが修正案を作成。
+- 9_expert_review_production_feedback:
+    enabled: "{{enable_production_feedback_review}}"
+    tasks:
+      - プロダクション＆フィードバックチームが修正案をレビュー
+- 10_revision_2_loop:
+    tasks:
+      - 管理エージェントがFB(あれば)に基づき、必要に応じて再度修正指示 (ステップ7に戻る可能性あり)。レビュー通過までループ。
+- 11_bilingual_optimization: レビュー通過後、バイリンガル最適化エージェントが映像全体のプロンプトを日英で最適化。
+- 12_image_generation_execution:
+    tasks:
+      - 管理エージェントが、確定した各セグメントの画像生成プロンプト (`start/end_image_generation_prompt`) を用いて、選定された `{{target_image_ai_model}}` のツール/APIを呼び出し、画像を生成。
+      - 画像一貫性追跡エージェントが、生成された画像のメタデータを取得し、シード値と画像参照を `{{character_seed_values}}` と `{{reference_images}}` に保存。
+      - 各セグメントのエンド画像生成時に、対応するスタート画像のシード値や画像参照を継承するよう指示
+      - 生成された画像への参照（ファイルパス、IDなど）を記録。
+    note: "このステップの実行には外部ツール連携が必要です。"
+- 13_video_generation_preparation:
+    tasks:
+      - "管理エージェントが生成された画像シーケンスと、映像全体のプロンプト（特にカメラワーク・トランジション指示）を準備する"
+      - >
+        "{{ segment_duration_flexible }} = true" の場合は、
+        セグメント尺管理エージェントが提供する実際の尺
+        `{{ segment_actual_durations }}` に基づきプロンプトを調整する
+    note: "動画生成 AI／ツールに応じた入力形式に整形する場合があります。"
+- 14_video_generation_execution:
+    tasks:
+      - 管理エージェントが準備した素材と指示を用いて、動画生成AI/ツールを呼び出し、動画セグメントまたは最終動画を生成。
+      - 生成された動画への参照（ファイルパスなど）を記録。
+    note: "このステップの実行には外部ツール連携が必要です。使用する動画生成ツールは別途指定または選定が必要になる場合があります。"
+- 15_final_review: 管理エージェントが最終的なプロンプト定義と生成されたアセットの品質、一貫性、変数組み込み等を確認
+- 16_final_output: 管理エージェントが最終的な成果物（プロンプト定義YAMLと生成アセット情報）を出力 

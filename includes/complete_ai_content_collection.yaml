@@ -1,0 +1,286 @@
+title: "AI視覚生成とプロンプトエンジニアリング総合ドキュメント"
+
+sections:
+  project_overview:
+    title: "プロジェクト概要"
+    content: "AIを活用した視覚コンテンツ生成の包括的なガイドラインとベストプラクティス"
+
+  prompt_engineering:
+    basic_principles:
+      title: "プロンプトエンジニアリングの基本原則"
+      content: "効果的なプロンプト設計の基礎となる考え方と原則"
+
+    techniques:
+      title: "プロンプトエンジニアリング技術"
+      chain_of_thought:
+        title: "Chain-of-Thought（思考の連鎖）"
+        description: "段階的な思考プロセスを明示的に示す技術"
+      other_techniques:
+        title: "その他の技術"
+        description: "様々なプロンプトエンジニアリング手法"
+
+  image_generation:
+    title: "画像生成AI"
+    models:
+      title: "モデル概要"
+      description: "主要な画像生成AIモデルの特徴と用途"
+    
+    dall_e_3:
+      title: "DALL-E 3 プロンプト設計"
+      description: "DALL-E 3向けの最適化されたプロンプト設計ガイド"
+    
+    common_principles:
+      title: "プロンプト設計の共通原則"
+      description: "画像生成AI全般に適用できるプロンプト設計の基本原則"
+    
+    use_case_optimization:
+      title: "用途別最適化"
+      description: "目的に応じたプロンプト設計の最適化方法"
+    
+    troubleshooting:
+      title: "問題解決ガイド"
+      description: "一般的な問題とその解決方法"
+
+  video_generation:
+    title: "動画生成AI"
+    models:
+      title: "モデル概要"
+      description: "主要な動画生成AIモデルの特徴と用途"
+    
+    sora:
+      title: "Sora プロンプト設計"
+      description: "Sora向けの最適化されたプロンプト設計ガイド"
+    
+    common_principles:
+      title: "プロンプト設計の共通原則"
+      description: "動画生成AI全般に適用できるプロンプト設計の基本原則"
+    
+    use_case_optimization:
+      title: "用途別最適化"
+      description: "目的に応じたプロンプト設計の最適化方法"
+    
+    troubleshooting:
+      title: "問題解決ガイド"
+      description: "一般的な問題とその解決方法"
+
+use_cases:
+  marketing:
+    title: "マーケティングコンテンツ制作"
+    social_media:
+      title: "ソーシャルメディアマーケティング"
+      short_video_ads:
+        duration: "15-30秒"
+        recommended_models:
+          - "Fast SVD"
+          - "Pixverse Fast"
+        optimization: "高速処理モード、品質バランス重視"
+        use_cases:
+          - "商品紹介"
+          - "サービス告知"
+    
+    brand_content:
+      title: "ブランドコンテンツ"
+      brand_story_videos:
+        recommended_models:
+          - "Pika v2.2"
+          - "WAN 2.1 Pro"
+        settings: "高品質モード、スタイル一貫性重視"
+        use_cases:
+          - "コーポレートビデオ"
+          - "ブランドイメージ"
+    
+    product_promotion:
+      title: "商品プロモーション"
+      product_detail_videos:
+        recommended_models:
+          - "MiniMax Director"
+          - "Ray 2"
+        optimization: "商品特徴の強調、細部表現の向上"
+        applications:
+          - "EC商品紹介"
+          - "機能説明"
+
+  social_media:
+    title: "SNS・デジタル広告"
+    instagram_tiktok:
+      title: "インスタグラム/TikTok広告"
+      short_videos:
+        models:
+          - "Fast SVD LCM"
+          - "T2V Turbo"
+        settings: "垂直動画最適化、注目度向上"
+        metrics:
+          - "エンゲージメント率"
+          - "視聴完了率"
+    
+    web_banners:
+      title: "Webバナー・広告"
+      animated_ads:
+        models:
+          - "Pika Standard"
+          - "Pixverse Fast"
+        optimization:
+          - "ファイルサイズ"
+          - "ロード時間"
+        formats:
+          - "GIF"
+          - "WebM"
+          - "MP4"
+
+  education:
+    title: "教育・トレーニング教材"
+    online_learning:
+      title: "オンライン学習コンテンツ"
+      explanation_videos:
+        models:
+          - "Ray 2 Flash"
+          - "MiniMax Director"
+        settings: "明確な視覚表現、段階的説明"
+        uses:
+          - "概念説明"
+          - "手順解説"
+    
+    technical_training:
+      title: "技術トレーニング"
+      practical_demos:
+        models:
+          - "Vidu Template"
+          - "Hailuo T2V"
+        optimization: "詳細表示、動作の正確性"
+        applications:
+          - "操作手順"
+          - "安全教育"
+
+  entertainment:
+    title: "エンターテイメント制作"
+    creative_content:
+      title: "クリエイティブコンテンツ"
+      art_works:
+        models:
+          - "Pika Scenes"
+          - "WAN Effects"
+        settings: "創造的表現、スタイル実験"
+        distribution:
+          - "ギャラリー展示"
+          - "オンライン配信"
+    
+    game_assets:
+      title: "ゲームアセット"
+      characters_backgrounds:
+        models:
+          - "Mochi V1"
+          - "Haiper Video"
+        optimization: "ゲームエンジン互換性"
+        uses:
+          - "モーション素材"
+          - "エフェクト"
+
+workflow:
+  pre_production:
+    title: "プリプロダクション"
+    steps:
+      - "目的・要件定義"
+      - "モデル選定"
+      - "リソース準備"
+      - "テスト生成"
+  
+  production:
+    title: "プロダクション"
+    steps:
+      - "初期生成"
+      - "品質確認"
+      - "パラメータ調整"
+      - "本番生成"
+  
+  post_production:
+    title: "ポストプロダクション"
+    steps:
+      - "編集・加工"
+      - "フォーマット変換"
+      - "品質チェック"
+      - "配信準備"
+
+success_factors:
+  quality_management:
+    title: "品質管理"
+    points:
+      - "一貫性の維持"
+      - "品質基準の設定"
+      - "レビュープロセス"
+      - "フィードバック反映"
+  
+  efficiency:
+    title: "効率化"
+    points:
+      - "バッチ処理の活用"
+      - "テンプレート化"
+      - "ワークフロー最適化"
+      - "リソース管理"
+  
+  scalability:
+    title: "スケーラビリティ"
+    points:
+      - "処理能力の拡張"
+      - "並列処理の活用"
+      - "クラウドリソース活用"
+      - "自動化の導入"
+
+evaluation:
+  performance_metrics:
+    title: "パフォーマンス指標"
+    metrics:
+      - "生成品質"
+      - "処理時間"
+      - "リソース効率"
+      - "コスト効果"
+  
+  improvement_cycle:
+    title: "改善サイクル"
+    steps:
+      - "データ収集"
+      - "分析評価"
+      - "改善計画"
+      - "実装と検証"
+
+model_selection:
+  commercial_content:
+    title: "商用コンテンツ制作"
+    models:
+      high_quality_video:
+        - "Pika v2.2"
+        - "WAN 2.1 Pro"
+      short_video:
+        - "MiniMax Video-01"
+        - "Kling 1.6 Pro"
+      real_time_processing:
+        - "Fast SVD LCM"
+        - "Pixverse Fast"
+      brand_expansion:
+        - "Hunyuan Video LoRA"
+        - "Luma Dream Machine"
+  
+  creative_production:
+    title: "クリエイティブ制作"
+    models:
+      art_expression:
+        - "Pika v2.2 Scenes"
+        - "WAN Effects"
+      characters:
+        - "Vidu Reference"
+        - "Kling Pro Series"
+      experimental_works:
+        - "CogVideoX-5B"
+        - "Stepfun Video"
+      animation:
+        - "Mochi V1"
+        - "Haiper Video"
+  
+  education_training:
+    title: "教育・トレーニング"
+    models:
+      explanation_videos:
+        - "Ray 2 Flash"
+        - "MiniMax Director"
+      presentations:
+        - "LTX Video v0.95"
+        - "Pixverse v3.5" 

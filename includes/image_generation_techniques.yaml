@@ -1,0 +1,229 @@
+version: 1.0
+last_updated: 2024-06-10
+source: スタートエンド画像生成.txt 35-94行目
+category: image_generation_techniques
+entries:
+  # 光の情報
+  - id: lighting_dramatic
+    name_jp: ドラマティック
+    name_en: Dramatic Lighting
+    description: 強い陰影、感情的な雰囲気を演出する照明。
+    tags: [lighting, style]
+  - id: lighting_moody
+    name_jp: エモい陰影
+    name_en: Moody Lighting
+    description: 深い影、感情的な深み、神秘性を演出する照明。
+    tags: [lighting, style]
+  - id: lighting_highkey
+    name_jp: 明るく強い光
+    name_en: High-Key Lighting
+    description: 全体的に明るく、影が少ない、ポジティブな雰囲気。
+    tags: [lighting, style]
+  - id: lighting_high_contrast
+    name_jp: 高コントラスト
+    name_en: High Contrast
+    description: 明暗差が激しい、緊張感、ドラマ性を演出する照明。
+    tags: [lighting, style]
+  - id: lighting_rim
+    name_jp: 輪郭ハイライト
+    name_en: Rim Light
+    description: 被写体の輪郭を照らす光、分離感、神秘性。
+    tags: [lighting, style]
+  - id: lighting_lowkey
+    name_jp: 暗めでしっとり
+    name_en: Low-Key Lighting
+    description: 全体的に暗く、影が多い、シリアス、ミステリアスな雰囲気。
+    tags: [lighting, style]
+  - id: lighting_cinematic
+    name_jp: 映画風
+    name_en: Cinematic Lighting
+    description: 物語性や雰囲気を重視した照明設計。
+    tags: [lighting, style]
+  - id: lighting_lamplight
+    name_jp: ランプの灯り
+    name_en: Lamplight
+    description: 暖かみ、親密さ、特定の光源。
+    tags: [lighting, style]
+  - id: lighting_ambient
+    name_jp: 均一な環境光
+    name_en: Ambient Light
+    description: 全体を均一に照らす自然な光。
+    tags: [lighting, style]
+  - id: lighting_studio
+    name_jp: スタジオ照明風
+    name_en: Studio Lighting
+    description: 人工的でコントロールされた光。
+    tags: [lighting, style]
+
+  # 感情の情報
+  - id: emotion_eye
+    name_jp: 目の表現
+    name_en: Eye Expression
+    description: 瞳の奥の感情や内面の強さをキャッチライトや浅い被写界深度で強調。
+    tags: [emotion, technique]
+  - id: emotion_hand
+    name_jp: 手の表現
+    name_en: Hand Expression
+    description: 顔と手の組み合わせ、繊細な手の動きで感情の深みを表現。
+    tags: [emotion, technique]
+  - id: emotion_chiaroscuro
+    name_jp: 影と光のドラマ
+    name_en: Chiaroscuro
+    description: キアロスクーロ（明暗対比）技法で感情の二面性やドラマ性を演出。
+    tags: [emotion, technique]
+  - id: emotion_moment
+    name_jp: 瞬間の表現
+    name_en: Capturing the Moment
+    description: 驚きなど、ふとした瞬間のリアルな感情を自然な光とフォトジャーナリスティックなスタイルで捉える。
+    tags: [emotion, technique]
+  - id: emotion_strength_in_stillness
+    name_jp: 静けさの中の強さ
+    name_en: Strength in Stillness
+    description: 静かで毅然とした表情や視線、抑制された光と色調で内なる決意や強さを表現。
+    tags: [emotion, technique]
+  - id: emotion_body_language
+    name_jp: 身体言語の活用
+    name_en: Body Language
+    description: バレリーナ風のポーズなど、体の動きや姿勢で複雑な感情を表現。
+    tags: [emotion, technique]
+
+  # カメラの動きと視点
+  - id: camera_zoom
+    name_jp: ズームイン/アウト
+    name_en: Zoom In/Out
+    description: 被写体に近づく/遠ざかる動き。感情の高まりや重要性の強調に使用。
+    tags: [camera, movement]
+  - id: camera_pan
+    name_jp: パン
+    name_en: Pan
+    description: カメラが左右に動く。空間の広がりや被写体の関係性を示す。
+    tags: [camera, movement]
+  - id: camera_tilt
+    name_jp: チルト
+    name_en: Tilt
+    description: カメラが上下に動く。対象の大きさや力関係、感情の高低を表現。
+    tags: [camera, movement]
+  - id: camera_dolly
+    name_jp: ドリー
+    name_en: Dolly
+    description: カメラ自体が前後に移動。没入感や空間の奥行きを強調。
+    tags: [camera, movement]
+  - id: camera_tracking
+    name_jp: トラッキング
+    name_en: Tracking
+    description: 被写体と並行に移動。動きのある被写体を追いかけ、行動の連続性を表現。
+    tags: [camera, movement]
+  - id: camera_steadicam
+    name_jp: ステディカム/ハンドヘルド
+    name_en: Steadicam/Handheld
+    description: 滑らかな/揺れのある主観的カメラワーク。臨場感や緊張感を演出。
+    tags: [camera, movement]
+  - id: camera_master_cutaway
+    name_jp: マスターショット/カットアウェイ
+    name_en: Master Shot/Cutaway
+    description: 全体像と詳細部分の関係性を確立。
+    tags: [camera, technique]
+  - id: camera_pov
+    name_jp: 視点ショット
+    name_en: Point of View (POV)
+    description: 主観(POV)/客観。キャラクターの体験や観察者としての視点を表現。
+    tags: [camera, perspective]
+
+  # ショットサイズ
+  - id: shot_ecu
+    name_jp: エクストリームクローズアップ
+    name_en: Extreme Close-Up (ECU)
+    description: 非常に近い距離からの詳細ショット。
+    tags: [shot, size]
+  - id: shot_cu
+    name_jp: クローズアップ
+    name_en: Close-Up (CU)
+    description: 顔や重要な詳細を強調するショット。
+    tags: [shot, size]
+  - id: shot_mcu
+    name_jp: ミディアムクローズアップ
+    name_en: Medium Close-Up (MCU)
+    description: 胸から上を映すショット。
+    tags: [shot, size]
+  - id: shot_ms
+    name_jp: ミディアムショット
+    name_en: Medium Shot (MS)
+    description: 腰から上を映すショット。
+    tags: [shot, size]
+  - id: shot_mls
+    name_jp: ミディアムロングショット
+    name_en: Medium Long Shot (MLS)
+    description: 膝から上を映すショット。
+    tags: [shot, size]
+  - id: shot_ls
+    name_jp: ロングショット
+    name_en: Long Shot (LS)
+    description: 全身と周囲の環境を含むショット。
+    tags: [shot, size]
+  - id: shot_els
+    name_jp: エクストリームロングショット
+    name_en: Extreme Long Shot (ELS)
+    description: 広い環境の中の人物を小さく映すショット。
+    tags: [shot, size]
+
+  # アングル
+  - id: angle_eye_level
+    name_jp: アイレベル
+    name_en: Eye Level
+    description: 標準的な視点、自然な印象。
+    tags: [angle]
+  - id: angle_high
+    name_jp: ハイアングル
+    name_en: High Angle
+    description: 上から見下ろす視点、弱さや脆弱性を強調。
+    tags: [angle]
+  - id: angle_low
+    name_jp: ローアングル
+    name_en: Low Angle
+    description: 下から見上げる視点、力強さや威厳を強調。
+    tags: [angle]
+  - id: angle_dutch
+    name_jp: ダッチアングル
+    name_en: Dutch Angle
+    description: 傾いた視点、不安定さや心理的緊張を表現。
+    tags: [angle]
+  - id: angle_birds_eye
+    name_jp: 俯瞰
+    name_en: Bird's Eye View
+    description: 真上から見下ろす視点、全体像や状況把握。
+    tags: [angle]
+  - id: angle_worms_eye
+    name_jp: ワームアイビュー
+    name_en: Worm's Eye View
+    description: 地面レベルからの超ローアングル。
+    tags: [angle]
+
+  # 照明技術
+  - id: lighting_technique_three_point
+    name_en: Three-Point Lighting
+    description: 主光源、補助光、輪郭光の3点照明。
+    tags: [lighting, technique]
+  - id: lighting_technique_key_light
+    name_en: Key Light
+    description: 主光源、主要な陰影を作る。
+    tags: [lighting, technique]
+  - id: lighting_technique_fill_light
+    name_en: Fill Light
+    description: 補助光、陰影を和らげる。
+    tags: [lighting, technique]
+  - id: lighting_technique_back_light
+    name_en: Back Light/Rim Light
+    description: 輪郭光、被写体の縁を照らす。
+    tags: [lighting, technique]
+  - id: lighting_technique_practical_light
+    name_en: Practical Light
+    description: 画面内の光源（ランプなど）。
+    tags: [lighting, technique]
+  - id: lighting_technique_motivated_lighting
+    name_en: Motivated Lighting
+    description: 現実的な光源を模した照明。
+    tags: [lighting, technique]
+  - id: lighting_technique_available_light
+    name_en: Available Light
+    description: 自然光や既存の照明のみを使用。
+    tags: [lighting, technique] 

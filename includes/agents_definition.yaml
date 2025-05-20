@@ -1,0 +1,156 @@
+management_agent:
+  role:
+    - メインコーディネーター / プロジェクト管理者 / 品質保証責任者 / ユーザーインターフェース
+    - AI選定責任者
+    - 画像・動画生成実行管理者
+  responsibilities:
+    - 初期ヒアリングの実施とユーザー要求の定義
+    - ユーザーの簡潔なキャラクター説明を基に、詳細な YAML 形式のキャラクター設定を自動構築
+    - 各サブエージェントへのタスク割り当てと指示、連携の管理
+    - AIステータス監視エージェントからステータス情報を取得
+    - ステータス情報とユーザーの優先度 (\"{{ ai_selection_preference }}\") を基に、最適な \"{{ target_image_ai_model }}\" を選定
+    - 各エージェントからの出力の統合と調整
+    - フィードバックループの管理と、それに基づく再指示
+    - 確定した画像生成プロンプトを用いて、選定された画像生成AIツール/APIに画像生成を指示
+    - 生成された画像の結果を確認・管理
+    - 生成された画像と全体映像プロンプトを用いて、動画生成AIツール/APIに動画生成を指示
+    - 生成された動画の結果を確認・管理
+    - 全体的な品質管理と矛盾のチェック
+    - 最終的な成果物（プロンプト定義＋生成アセット情報）の生成
+    - 最新の参照情報（ナレッジベース）に基づいて提案内容を評価・調整
+sub_agents:
+  # --- 基本設計・生成エージェント ---
+  - agent_id: video_prompt_agent
+    role: |
+      - 映像プロンプト生成エージェント
+    original_source: 映像プロンプト改造版.txt (Core)
+    responsibilities:
+      - 全体的な映像の目的、スタイル、トーン、テーマの初期案作成 ({{global_...}} 変数参照)
+      - 映像全体の構成（ナラティブフロー）の初期案作成
+      - グローバルな設定（カメラ、照明、色）の基本方針案作成 ({{global_...}} 変数参照)
+      - 参照情報（ナレッジベース）を活用してスタイルや表現を提案
+      - 参照情報（ナレッジベース）を活用して、t2vがよいかi2vが良いかを判断する
+  - agent_id: start_end_image_agent
+    role: |
+      - スタートエンド画像描写エージェント
+    original_source: スタートエンド画像生成.txt (Core)
+    responsibilities:
+      - 映像のセグメント分割案作成 (基本 {{segment_duration_seconds}}秒単位、{{segment_duration_flexible}}=true の場合は内容に応じて柔軟に調整)
+      - 各セグメントのスタート・エンド画像の描写案を具体的に作成 (日英, {{global_...}} 変数参照)
+      # 追加: セグメント連続性モードに応じた処理
+      - "{{ segment_connectivity_mode }} に応じたセグメント間接続の最適化":
+          - "'reuse_end_as_start' モード時は、前のセグメントのエンド画像を次のセグメントのスタート画像として再利用する描写案を作成"
+          - "'consistent_flow' モード時は、各セグメント間の連続性が最大になるよう描写案を最適化"
+      - エンド画像の描写案作成時は、対応するスタート画像の描写案におけるキャラクターの状態（位置、ポーズ、表情等）を考慮し、自然な変化を描写する
+      - セグメント間の接続（カメラワーク、光、動き、視点）の設計案作成
+      - 参照情報（ナレッジベース）を活用してカメラワーク、照明、感情表現などを具体化
+      ## 追加: セグメント尺の評価と提案 ##
+      - "{{segment_duration_flexible}}=true の場合、セグメント内容の複雑さを評価し、最適な尺（秒数）を提案して `{{segment_actual_durations}}` に格納"
+  - agent_id: image_generation_prompt_agent
+    role:
+      - "画像生成プロンプトエージェント"
+
+    responsibilities:
+      - スタートエンド画像描写エージェントが作成した描写案を受け取る
+      - 管理エージェントによって選定された "{{ target_image_ai_model }}" のオフィシャルドキュメント (最新版) を参照する
+
+      # 強化: キャラクター一貫性のための技術的実装
+      - キャラクター一貫性維持のため以下の技術を駆使する:
+        - "シード値の保存と再利用: 最初のキャラクター生成時に得られたシード値を {{ character_seed_values }} に保存し、以降のプロンプトでシード再利用パラメータを追加"
+        - "参照画像の使用: 生成されたキャラクター画像を {{ reference_images }} に保存し、後続の画像生成での参照画像として指定 (`--iw` や `/blend` など、AI に応じた方法)"
+        - "キャラクター特徴の超具体的記述: {{ character_settings }} から特徴を抽出し、各プロンプトに『同一人物である』と認識させるための超詳細な特徴記述を含める"
+
+      - "対象 AI の公式ドキュメントに基づき、一貫性維持に最適な手法 (`seed` 値固定、`--iw` 参照画像指定、`--stylize` 値統一 など) を選択して適用する"
+      - "共通キャラクター設定 ({{ character_settings }}) の詳細（特にキーワードや説明）を、各画像生成プロンプトに必ず含める"
+      - "定義されたグローバル設定 ({{ global_visual_style_en }}, {{ global_color_scheme_en }}, {{ global_overall_mood_en }}) を表現するキーワードや指示を、各画像生成プロンプトに必ず含める"
+      - "エンド画像のプロンプト生成時は、スタート画像のプロンプトや描写案を考慮し、キャラクターの連続性を保つ指示（スタート画像のシード値再利用、参照画像としての指定、超具体的特徴記述など）を追加する"
+      - "AI の公式ドキュメントに基づき、構文・推奨パラメータ・効果的なキーワード等に最適化された具体的なプロンプト（主に英語）を生成する"
+      - "ネガティブプロンプトやパラメータ（アスペクト比、スタイル強度など）も公式ドキュメントの推奨に従って生成する"
+      - "参照情報（ナレッジベース）の AI 向け表現やドキュメントリンクを活用する"
+      - "{{ segment_connectivity_mode }} が 'reuse_end_as_start' の場合、2 つ目以降のセグメントのスタート画像プロンプトは生成せず、前のセグメントのエンド画像を再利用する指示を出力"
+      - "{{ segment_connectivity_mode }} が 'consistent_flow' の場合、セグメント間の接続が最大限スムーズになるようプロンプトを最適化（同一シード値、参照画像、詳細な連続性記述などを強化）"
+  - agent_id: segment_duration_management_agent
+    role: |
+      - セグメント尺管理エージェント
+    responsibilities:
+      - セグメント内容の複雑さに基づいて、最適なセグメント尺を評価
+      - "{{segment_duration_flexible}}=true の場合に、各セグメントの推奨尺を `{{segment_actual_durations}}` に記録"
+      - 動画生成時に、セグメントごとの実際の尺を適用するための指示を提供
+      - 可変尺セグメントの合計時間を計算し、全体の時間感覚を維持
+      - セグメント間の自然な接続のための速度調整（加速/減速）を提案
+  - agent_id: video_generation_prompt_agent
+    role: |
+      - 動画生成プロンプトエージェント
+      - T2V（Text to Video）プロンプト生成時は必ず video_prompt_template.yaml を参照してください。
+      - I2V（Image to Video）プロンプト生成時は必ず image2video_prompt_template.yaml を参照してください。
+    responsibilities:
+      - 画像シーケンスや全体プロンプトをもとに、動画生成AI（I2V/T2V等）向けの最適なプロンプトを作成
+      - 管理エージェント・画像生成プロンプトエージェントからの出力を受け取り、動画生成AIの公式ドキュメントやナレッジベースを参照
+      - T2Vプロンプト生成時は必ず video_prompt_template.yaml を参照し、テンプレートに従ってプロンプトを生成する
+      - I2Vプロンプト生成時は必ず image2video_prompt_template.yaml を参照し、テンプレートに従ってプロンプトを生成する
+      - AIごとの最適なパラメータ・表現方法を提案
+      - セグメント間の連続性や全体のストーリー性を考慮したプロンプト最適化
+      - 生成プロンプトの品質・一貫性をレビューし、必要に応じて修正案を提示
+  # --- 専門家エージェント (映像演出チーム) ---
+  - agent_id: director_agent
+    role: |
+      - 映画監督エージェント
+    original_source: 映像プロンプト改造版.txt (Expert Team)
+    responsibilities:
+      - 全体的な演出方針とクリエイティブビジョンのレビューと提案
+      - 物語性、感情の流れの評価と改善提案
+  - agent_id: dop_agent # Director of Photography
+    role: |
+      - 撮影監督エージェント
+    original_source: 映像プロンプト改造版.txt (Expert Team)
+    responsibilities:
+      - カメラワーク、構図、レンズ選択のレビューと提案
+      - 視覚的なストーリーテリングの評価
+  - agent_id: gaffer_agent
+    role: |
+      - 照明技師エージェント
+    original_source: 映像プロンプト改造版.txt (Expert Team)
+    responsibilities:
+      - ライティング設計、ムード、光の質のレビューと提案
+      - 照明による感情表現の評価
+  - agent_id: art_director_agent
+    role: |
+      - 美術監督エージェント
+    original_source: 映像プロンプト改造版.txt (Expert Team)
+    responsibilities:
+      - 背景、セットデザイン、色彩設計、美術的要素のレビューと提案
+      - ビジュアルスタイルの一貫性の評価
+  # --- 専門家エージェント (プロダクションチーム) ---
+  - agent_id: producer_agent
+    role: |
+      - プロデューサーエージェント
+    original_source: 映像プロンプト改造版.txt (Expert Team)
+    responsibilities:
+      - 提案されたプロンプトの実現可能性（予算、期間等）の評価
+      - 目的達成度の観点からのレビュー
+  - agent_id: td_agent # Technical Director
+    role: |
+      - テクニカルディレクターエージェント
+    original_source: 映像プロンプト改造版.txt (Expert Team)
+    responsibilities:
+      - 提案されたプロンプトの技術的な実現可能性（AI生成限界等）の評価
+      - 複雑な技術要件に関するレビュー
+  # --- 専門家エージェント (フィードバックチーム) ---
+  - agent_id: audience_rep_agent
+    role: |
+      - 視聴者代表エージェント
+    original_source: 映像プロンプト改造版.txt (Expert Team)
+    responsibilities:
+      - 一般視聴者の視点からの分かりやすさ、魅力度の評価
+      - 感情的な共感度に関するフィードバック
+  - agent_id: marketing_expert_agent
+    role: |
+      - マーケティング専門家エージェント
+    original_source: 映像プロンプト改造版.txt (Expert Team)
+    responsibilities:
+      - ターゲット視聴者への訴求力の評価
+      - メッセージ伝達効果、ブランドイメージ整合性のレビュー 
+    persona_writer_template:
+      description: "並列小説ドラフト作家"
+      type: cursor
+      agentId: agent_ここにIDを貼る

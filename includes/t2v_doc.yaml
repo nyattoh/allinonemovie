@@ -1,0 +1,143 @@
+models:
+  cogvideo_x5b:
+    name: "CogVideoX-5B"
+    description: "テキストから動画を生成するAIモデル"
+    documentation:
+      paper: "https://arxiv.org/abs/2205.15868"
+      github: "https://github.com/THUDM/CogVideo"
+      project_page: "未公開"
+
+    prompt_guide:
+      guidelines:
+        - "明確かつ詳細な記述"
+        - "キーワードの活用"
+        - "否定的なプロンプトの利用"
+        - "スタイルの指定"
+      examples:
+        - "A cat playing with a ball of yarn in a sunny living room."
+        - "A futuristic city with flying cars and neon lights."
+        - "A dragon flying over a snow-capped mountain."
+        - "A realistic portrait of a woman with long hair."
+        - "An animated scene of a robot dancing in a disco."
+
+    parameters:
+      - name: "Number of frames"
+        description: "生成する動画のフレーム数を指定"
+      - name: "Frame rate"
+        description: "動画のフレームレートを指定"
+      - name: "Seed"
+        description: "乱数シードを指定"
+      - name: "Guidance scale"
+        description: "プロンプトへの適合度を制御"
+      - name: "Number of inference steps"
+        description: "推論ステップ数を指定"
+
+    best_practices:
+      - "高品質なプロンプトの作成"
+      - "パラメータの調整"
+      - "実験と反復"
+      - "リソースの活用"
+
+    use_cases:
+      - "コンテンツ制作"
+      - "教育"
+      - "エンターテイメント"
+      - "研究"
+
+    updates:
+      - date: "2022年5月"
+        description: "論文の発表"
+
+    comparison:
+      features:
+        - "大規模な事前学習"
+        - "Transformerアーキテクチャ"
+      optimal_uses:
+        - "高品質な動画生成"
+        - "長時間の動画生成"
+
+  fast_svd_lcm:
+    name: "Fast SVD LCM"
+    description: "高速な推論が可能なテキストから動画を生成するモデル"
+    documentation:
+      paper: "https://arxiv.org/abs/2402.12774"
+
+    prompt_guide:
+      guidelines:
+        - "明確かつ具体的な記述"
+        - "スタイルの指定"
+        - "カメラアングルと動きの指定"
+        - "詳細の追加"
+      examples:
+        - "A cat playing with a ball of yarn in a sunny living room."
+        - "A futuristic cityscape in a cyberpunk style."
+        - "A close-up shot of a flower blooming, with a slow zoom-in."
+        - "A majestic eagle soaring through the sky, with snow-capped mountains in the background, during a golden sunset."
+
+    parameters:
+      - name: "Number of inference steps"
+        description: "推論ステップ数を調整"
+      - name: "Guidance scale"
+        description: "ガイダンススケールを調整"
+      - name: "Seed"
+        description: "乱数シードを指定"
+
+    best_practices:
+      - "プロンプトの実験"
+      - "パラメータの調整"
+      - "他のツールとの組み合わせ"
+
+    use_cases:
+      - "コンテンツ作成"
+      - "教育"
+      - "エンターテイメント"
+      - "研究"
+
+  gen2:
+    name: "Gen2"
+    description: "Runway Researchが開発したテキストから動画を生成するAIモデル"
+    documentation:
+      website: "https://runwayml.com/"
+      research: "https://runwayml.com/research/"
+      youtube: "https://www.youtube.com/@RunwayML"
+
+    prompt_guide:
+      components:
+        - "被写体"
+        - "アクション"
+        - "環境"
+        - "スタイル"
+        - "キーワード"
+      examples:
+        - "A majestic lion walking through a grassy savanna at sunset. Golden hour lighting, cinematic."
+        - "A futuristic cityscape with flying cars and neon lights. Cyberpunk style, Blade Runner inspired."
+        - "A close-up of a blooming rose with water droplets. Macro photography, soft focus."
+        - "A group of friends laughing and dancing at a beach party. Sunny day, vibrant colors."
+        - "An astronaut floating in space with Earth in the background. Realistic rendering, high detail."
+      tips:
+        - "具体的に記述する"
+        - "キーワードを活用する"
+        - "実験を繰り返す"
+        - "他のユーザーのプロンプトを参考にする"
+
+    parameters:
+      - name: "Motion Brush"
+        description: "動画内の動きの量を調整"
+      - name: "Camera Controls"
+        description: "カメラの動きを制御"
+      - name: "Style Presets"
+        description: "あらかじめ定義されたスタイルを適用"
+      - name: "Seed"
+        description: "乱数シードを設定"
+
+    best_practices:
+      - "高解像度の画像を使用する"
+      - "短い動画から始める"
+      - "生成された動画を編集する"
+      - "コミュニティに参加する"
+
+    use_cases:
+      - "映画制作"
+      - "広告"
+      - "教育"
+      - "エンターテイメント" 
