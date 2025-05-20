@@ -22,9 +22,17 @@ allinonemovie/
 │   └── user_prompt_questions.yaml # ユーザー入力テンプレ
 ├── includes/                 # テンプレ・知識ベース・エージェント定義
 │   ├── ai_prompt_tips/       # AIプロンプトTipsキャッシュ
-│   ├── agents_definition.yaml
-│   ├── ...（各種テンプレ・技法・チェックリスト等）
-├── .venv/                    # Python仮想環境
+│   ├── agents_definition.yaml # エージェント・ペルソナ定義
+│   ├── complete_ai_content_collection.yaml # AIプロンプト・モデル知識集
+│   ├── workflow_checklist.yaml # 各工程のチェックリスト
+│   ├── video_prompt_template.yaml # 映像AI用プロンプトテンプレ
+│   ├── screenplay_template.yaml # 脚本テンプレ
+│   ├── novel_template.yaml   # 小説テンプレ
+│   ├── story_content_techniques.yaml # ストーリー技法集
+│   ├── image_generation_techniques.yaml # 画像生成技法集
+│   ├── t2v_doc.yaml         # Text-to-Video設定
+│   ├── i2v_doc.yaml         # Image-to-Video設定
+│   └── ...（その他テンプレ・技法・チェックリスト等）
 ├── .gitignore
 └── README.md
 ```
@@ -49,6 +57,10 @@ allinonemovie/
 - `includes/video_prompt_template.yaml`：映像AI用プロンプトテンプレ
 - `includes/screenplay_template.yaml`：脚本テンプレ
 - `includes/novel_template.yaml`：小説テンプレ
+- `includes/story_content_techniques.yaml`：ストーリー技法集
+- `includes/image_generation_techniques.yaml`：画像生成技法集
+- `includes/t2v_doc.yaml`：Text-to-Video設定
+- `includes/i2v_doc.yaml`：Image-to-Video設定
 
 ## 依存パッケージ
 
