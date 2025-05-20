@@ -1,105 +1,108 @@
-# All in One Movie Generator
+# All-in-One Movie Generator
 
-AIを活用した映像制作のための包括的なワークフローシステムです。小説から映像まで、一貫した制作プロセスを提供します。
+AI × YAMLで小説・脚本・映像・画像生成を一気通貫で自動化するワークフローシステム
 
-## 機能
+---
 
-- 小説から映像への変換ワークフロー
-- 複数のAIモデルを活用した映像生成
-- プロンプトエンジニアリングの最適化
-- ストーリー構造の設計支援
-- キャラクター設定の管理
-- 映像生成のための詳細なプロンプト設計
+## 概要
 
-## プロジェクト構造
+本プロジェクトは、YAMLファイルのみで小説・脚本・映像・画像生成までを自動化するAIワークフロー基盤です。複数AIモデル・複数ペルソナ・知識ベースを統合し、専門知識不要で高品質なアウトプットを実現します。
+
+- **YAML一元管理**：全設定・プロンプト・テンプレートをYAMLで統一
+- **AIモデル自動最適化**：Gen-2/Pika/Fast SVD LCM/CogVideoX-5B等に対応
+- **ペルソナ並列生成**：10ペルソナによる多様な草案生成と自動スコアリング
+- **再帰的推敲ループ**：最大15回の自動書き直し・フィードバック
+- **知識ベース連携**：AIプロンプトTipsを自動取得・最適化
+
+---
+
+## ディレクトリ構成
 
 ```
 allinonemovie/
-├── creative_flow/          # クリエイティブワークフロー関連ファイル
-├── includes/              # 設定ファイルとテンプレート
-│   ├── ai_prompt_tips/    # AIプロンプトのヒント
-│   └── ...               # その他の設定ファイル
-├── main.yaml             # メイン設定ファイル
-└── run_pipeline.py       # 実行スクリプト
+├── main.yaml                 # メイン設定・エントリーポイント
+├── creative_flow/            # ワークフロー・エンジン・依存パッケージ
+│   ├── main_workflow.yaml    # ワークフロー定義
+│   ├── workflow_engine.py    # 実行エンジン
+│   ├── requirements.txt      # 必要パッケージ
+│   └── user_prompt_questions.yaml # ユーザー入力テンプレ
+├── includes/                 # テンプレ・知識ベース・エージェント定義
+│   ├── ai_prompt_tips/       # AIプロンプトTipsキャッシュ
+│   ├── agents_definition.yaml
+│   ├── ...（各種テンプレ・技法・チェックリスト等）
+└── README.md
 ```
 
-## 主要コンポーネント
+---
 
-### 1. 小説作成フェーズ
-- テーマ・ジャンル・目標の設定
-- キャラクター設計
-- 世界観構築
-- プロット概要作成
-- 小説本文執筆
+## ワークフロー全体像
 
-### 2. 脚本変換フェーズ
-- 原作解析とテーマ・感情曲線の可視化
-- 映像構造設計
-- 脚本草稿作成
-- 推敲と整合性チェック
+1. **初期ヒアリング**：目的・主人公・舞台設定などを対話形式で取得
+2. **草案プロトタイプ生成**：AIが複数案を自動生成
+3. **レビュー＆分岐**：レビュー結果で次工程を自動選択
+4. **映像化/他工程/既存プロセス**：分岐に応じて各種フローへ
+5. **推敲ループ**：自動評価と最大15回の書き直し
+6. **知識ベース参照**：AIモデルごとに最新Tipsを自動取得
 
-### 3. 映像AIプロンプト変換フェーズ
-- AIモデル選定
-- プロジェクトメタデータ設定
-- シーン→セグメント変換
-- タイムライン詳細設計
-- 音声要素の定義
+---
 
-### 4. 映像生成・評価フェーズ
-- AIモデルへのプロンプト投入
-- 生成結果の確認
-- フィードバックループ
-- 最終出力の評価
+## 主要ファイル・テンプレート
+- `main.yaml`：全体設定・エントリーポイント
+- `creative_flow/main_workflow.yaml`：ワークフロー定義
+- `creative_flow/workflow_engine.py`：実行エンジン
+- `includes/agents_definition.yaml`：エージェント・ペルソナ定義
+- `includes/complete_ai_content_collection.yaml`：AIプロンプト・モデル知識集
+- `includes/workflow_checklist.yaml`：各工程のチェックリスト
+- `includes/video_prompt_template.yaml`：映像AI用プロンプトテンプレ
+- `includes/screenplay_template.yaml`：脚本テンプレ
+- `includes/novel_template.yaml`：小説テンプレ
 
-## 対応AIモデル
+---
 
-- Gen-2
-- Pika
-- Fast SVD LCM
-- CogVideoX-5B
-- その他主要な映像生成AIモデル
+## 依存パッケージ
+- openai>=1.0.0
+- python-dotenv>=1.0.0
+- PyYAML>=6.0
+- requests>=2.31.0
+- beautifulsoup4>=4.12.0
 
-## 使用方法
+---
 
-1. リポジトリのクローン
-```bash
-git clone https://github.com/nyattoh/allinonemovie.git
-```
+## 使い方
 
-2. 依存関係のインストール
-```bash
-cd allinonemovie
-pip install -r creative_flow/requirements.txt
-```
+1. **リポジトリのクローン**
+   ```bash
+   git clone https://github.com/nyattoh/allinonemovie.git
+   cd allinonemovie
+   ```
+2. **仮想環境の作成・依存パッケージのインストール**
+   ```bash
+   python -m venv .venv
+   .venv\Scripts\activate
+   pip install -r creative_flow/requirements.txt
+   ```
+3. **main.yamlやincludes/内テンプレを編集**
+4. **パイプライン実行**
+   ```bash
+   python creative_flow/workflow_engine.py
+   ```
 
-3. 設定ファイルの編集
-- `main.yaml`を編集してプロジェクト設定を行う
-- 必要に応じて`includes/`内のテンプレートをカスタマイズ
+---
 
-4. パイプラインの実行
-```bash
-python run_pipeline.py
-```
+## 注意事項・推奨運用
+- すべての設定・テンプレはYAMLで管理
+- 各フェーズで最低15回の推敲を推奨
+- Detarame要素（意外性）は整合性チェック必須
+- AIモデルごとのプロンプト最適化は自動
+- .venv/やキャッシュは.gitignoreで管理
 
-## 注意事項
-
-- 各フェーズで最低15回の推敲を行うことを推奨
-- Detarame要素は必ず整合性チェックを行うこと
-- 映像表現上の制約を常に意識すること
-- 全プロセスを通じて一貫性を保つこと
+---
 
 ## ライセンス
+MIT License
 
-このプロジェクトはMITライセンスの下で公開されています。
+---
 
-## 貢献
-
-1. このリポジトリをフォーク
-2. 新しいブランチを作成 (`git checkout -b feature/amazing-feature`)
-3. 変更をコミット (`git commit -m 'Add some amazing feature'`)
-4. ブランチにプッシュ (`git push origin feature/amazing-feature`)
-5. プルリクエストを作成
-
-## 連絡先
-
-プロジェクトに関する質問や提案がある場合は、GitHubのIssueを作成してください。 
+## 貢献・連絡先
+- Issue/Pull Request歓迎
+- 質問・提案はGitHub Issueまで 
