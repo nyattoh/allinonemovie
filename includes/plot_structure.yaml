@@ -1,0 +1,145 @@
+# 主要プロット構造
+plot_structure:
+  # 全体構成
+  overall:
+    act1: "導入部 - 能力の覚醒と世界の認識"
+    act2: "展開部 - 能力者としての成長と葛藤"
+    act3: "決着部 - 最終決戦と真実の解明"
+
+  # 第1幕：導入部
+  act1:
+    setup:
+      - name: "日常の崩壊"
+        description: "主人公の能力が突然覚醒"
+        emotional_value: 0.3
+        flags:
+          - "能力覚醒"
+          - "両親の死の真相"
+      - name: "能力者管理組織との出会い"
+        description: "組織への登録と訓練開始"
+        emotional_value: 0.4
+        flags:
+          - "組織加入"
+          - "教官との出会い"
+    inciting_incident:
+      - name: "最初の戦闘"
+        description: "能力者犯罪者との遭遇"
+        emotional_value: 0.6
+        flags:
+          - "戦闘経験"
+          - "能力の限界"
+    plot_point_1:
+      - name: "親友の危機"
+        description: "美咲が能力者犯罪者に狙われる"
+        emotional_value: 0.7
+        flags:
+          - "友情の試練"
+          - "保護者としての自覚"
+
+  # 第2幕：展開部
+  act2:
+    rising_action:
+      - name: "能力者管理組織の裏切り"
+        description: "組織内の陰謀発覚"
+        emotional_value: 0.5
+        flags:
+          - "組織の真実"
+          - "敵対者の存在"
+      - name: "妹の誘拐"
+        description: "反能力者組織による妹の拉致"
+        emotional_value: 0.8
+        flags:
+          - "家族の危機"
+          - "決意の固まり"
+    midpoint:
+      - name: "黒崎龍也との対峙"
+        description: "敵対者との初めての直接対決"
+        emotional_value: 0.9
+        flags:
+          - "敵対者の正体"
+          - "過去の真実"
+    plot_point_2:
+      - name: "能力の進化"
+        description: "新たな能力の覚醒"
+        emotional_value: 0.7
+        flags:
+          - "能力進化"
+          - "戦力強化"
+
+  # 第3幕：決着部
+  act3:
+    pre_climax:
+      - name: "最終決戦の準備"
+        description: "仲間たちとの再集結"
+        emotional_value: 0.6
+        flags:
+          - "仲間との絆"
+          - "決戦の準備"
+    climax:
+      - name: "最終決戦"
+        description: "黒崎龍也との最終対決"
+        emotional_value: 1.0
+        flags:
+          - "最終決戦"
+          - "真実の解明"
+    resolution:
+      - name: "新たな秩序"
+        description: "能力者と非能力者の共存"
+        emotional_value: 0.8
+        flags:
+          - "世界の再生"
+          - "未来への希望"
+
+  # サブプロット
+  subplots:
+    romance:
+      - name: "美咲との関係"
+        development: "友情から恋愛へ"
+        emotional_curve: [0.3, 0.5, 0.7, 0.9]
+    family:
+      - name: "妹との関係"
+        development: "保護者としての成長"
+        emotional_curve: [0.4, 0.6, 0.8, 1.0]
+    organization:
+      - name: "能力者管理組織"
+        development: "組織の改革"
+        emotional_curve: [0.3, 0.5, 0.7, 0.8]
+
+  # 伏線管理
+  foreshadowing:
+    - name: "両親の死"
+      setup: "第1幕"
+      payoff: "第3幕"
+      description: "事故の真相"
+    - name: "能力の起源"
+      setup: "第1幕"
+      payoff: "第2幕"
+      description: "異世界との繋がり"
+    - name: "黒崎の過去"
+      setup: "第2幕"
+      payoff: "第3幕"
+      description: "組織での裏切り"
+
+  # 感情曲線
+  emotional_curve:
+    act1: [0.3, 0.4, 0.6, 0.7]
+    act2: [0.5, 0.8, 0.9, 0.7]
+    act3: [0.6, 1.0, 0.8]
+
+  # プロットポイントの依存関係
+  plot_dependencies:
+    - from: "能力覚醒"
+      to: "組織加入"
+      type: "必須"
+    - from: "組織加入"
+      to: "最初の戦闘"
+      type: "必須"
+    - from: "最初の戦闘"
+      to: "親友の危機"
+      type: "因果"
+    - from: "親友の危機"
+      to: "能力の進化"
+      type: "因果"
+    - from: "能力の進化"
+      to: "最終決戦"
+      type: "必須" 

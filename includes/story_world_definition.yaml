@@ -1,0 +1,98 @@
+# 世界観定義
+world_settings:
+  # 基本設定
+  basic:
+    genre: "ファンタジー"  # ジャンル
+    era: "現代"  # 時代設定
+    location: "東京"  # 主要舞台
+    atmosphere: "ミステリアス"  # 世界観の雰囲気
+
+  # 世界の法則
+  rules:
+    magic_system:
+      type: "元素操作"
+      limitations: ["精神力依存", "使用回数制限"]
+      power_scale: 0.8  # 0.0-1.0のスケール
+    technology_level:
+      current: "現代"
+      advancement: 0.5  # 0.0-1.0のスケール
+    supernatural_elements:
+      - "幽霊"
+      - "超能力"
+      - "異世界の存在"
+
+  # 社会構造
+  society:
+    hierarchy:
+      - "一般市民"
+      - "能力者"
+      - "管理者"
+    conflicts:
+      - "能力者vs非能力者"
+      - "新旧価値観の対立"
+    taboos:
+      - "能力の公表禁止"
+      - "異世界の存在の隠蔽"
+
+  # 歴史的背景
+  history:
+    major_events:
+      - name: "大災害"
+        year: 2010
+        impact: "能力者の出現"
+      - name: "新秩序の確立"
+        year: 2015
+        impact: "能力者管理システムの導入"
+    hidden_truths:
+      - "能力の起源"
+      - "異世界との繋がり"
+
+  # 環境設定
+  environment:
+    climate: "温帯"
+    seasons: ["春", "夏", "秋", "冬"]
+    special_locations:
+      - name: "能力者特区"
+        description: "能力者が自由に能力を使用できる特別区域"
+      - name: "異世界の門"
+        description: "異世界と繋がる特殊な空間"
+
+  # 文化・風習
+  culture:
+    customs:
+      - "能力者登録制度"
+      - "能力使用許可証"
+    festivals:
+      - name: "能力者祭"
+        description: "能力者たちの技を競う祭り"
+    beliefs:
+      - "能力は神からの贈り物"
+      - "能力の乱用は災いを招く"
+
+  # 技術・文明
+  technology:
+    current_level: "現代"
+    special_tech:
+      - "能力測定装置"
+      - "異世界通信機"
+    limitations:
+      - "能力者専用技術の制限"
+      - "異世界技術の使用制限"
+
+  # 世界の危機
+  world_threats:
+    current:
+      - "能力の暴走"
+      - "異世界の侵食"
+    potential:
+      - "能力者による支配"
+      - "異世界との融合"
+
+  # 世界の希望
+  world_hope:
+    current:
+      - "能力者と非能力者の共存"
+      - "異世界との平和的交流"
+    potential:
+      - "新たな進化の可能性"
+      - "世界の再生" 

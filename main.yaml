@@ -68,16 +68,35 @@ output_format:
   i2v_template: includes/image2video_prompt_template.yaml
   t2v_template: includes/text2video_prompt_template.yaml
 
-  i2v_template: includes/image2video_prompt_template.yaml
-  t2v_template: includes/text2video_prompt_template.yaml
+# -------------------------------------------------------------------
+#  ストーリー生成設定
+# -------------------------------------------------------------------
+story_generation:
+  # 世界観定義
+  world_settings: !include includes/story_world_definition.yaml
+
+  # 登場人物設定
+  character_settings: !include includes/character_settings.yaml
+
+  # 主要プロット
+  plot_structure: !include includes/plot_structure.yaml
+
+  # 章構成
+  chapter_structure: !include includes/chapter_structure.yaml
+
+  # シーン詳細生成
+  scene_generation: !include includes/scene_generation.yaml
+
+  # 品質管理
+  quality_control: !include includes/quality_control.yaml
 
 # -------------------------------------------------------------------
 #  ランナー設定
 # -------------------------------------------------------------------
-runner:
-  script: run_pipeline.py
-  entry:  main
-  notes: |
-    - run_pipeline.py は !include 展開 → knowledge_fetch → エージェント実行 → scoring →
-      output フォルダ生成 まで一括実行する。
-    - 追加ライブラリ: requests, beautifulsoup4 (knowledge_fetch 用)
+#runner:
+#  script: run_pipeline.py
+#  entry:  main
+#  notes: |
+#    - run_pipeline.py は !include 展開 → knowledge_fetch → エージェント実行 → scoring →
+#      output フォルダ生成 まで一括実行する。
+#    - 追加ライブラリ: requests, beautifulsoup4 (knowledge_fetch 用)

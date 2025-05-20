@@ -1,0 +1,145 @@
+# 登場人物設定
+characters:
+  # 主人公
+  protagonist:
+    name: "佐藤 翔太"
+    age: 17
+    gender: "男性"
+    appearance:
+      height: 175
+      build: "普通"
+      hair: "黒髪"
+      eyes: "茶色"
+      distinguishing_features: ["左目の下の傷"]
+    personality:
+      traits:
+        - "正義感が強い"
+        - "優柔不断"
+        - "責任感がある"
+      strengths:
+        - "決断力"
+        - "共感力"
+        - "学習能力"
+      weaknesses:
+        - "過度な自己犠牲"
+        - "疑り深さ"
+        - "感情の起伏が激しい"
+    background:
+      family: "両親と妹の4人家族"
+      occupation: "高校生"
+      special_abilities:
+        - name: "元素操作"
+          type: "火"
+          power_level: 0.7
+          limitations: ["精神力依存", "使用回数制限"]
+      hidden_past:
+        - "幼少期の事故で能力を覚醒"
+        - "両親の死の真相"
+    relationships:
+      - name: "山田 美咲"
+        type: "親友"
+        description: "幼馴染で能力者"
+      - name: "佐藤 花子"
+        type: "妹"
+        description: "非能力者"
+    character_arc:
+      start: "能力を隠して生きる普通の高校生"
+      middle: "能力者としての責任に目覚める"
+      end: "能力者と非能力者の架け橋となる"
+
+  # 敵対者
+  antagonist:
+    name: "黒崎 龍也"
+    age: 35
+    gender: "男性"
+    appearance:
+      height: 185
+      build: "筋肉質"
+      hair: "銀髪"
+      eyes: "赤色"
+      distinguishing_features: ["右腕の機械義手"]
+    personality:
+      traits:
+        - "カリスマ性"
+        - "冷酷"
+        - "目的のためなら手段を選ばない"
+      strengths:
+        - "リーダーシップ"
+        - "戦術的思考"
+        - "強い精神力"
+      weaknesses:
+        - "過度な理想主義"
+        - "過去への執着"
+        - "人間不信"
+    background:
+      family: "不明"
+      occupation: "能力者管理組織の元幹部"
+      special_abilities:
+        - name: "元素操作"
+          type: "闇"
+          power_level: 0.9
+          limitations: ["精神汚染", "寿命短縮"]
+      hidden_past:
+        - "能力者管理組織での裏切り"
+        - "家族の死の真相"
+    relationships:
+      - name: "能力者管理組織"
+        type: "元所属"
+        description: "組織を裏切った過去"
+      - name: "反能力者組織"
+        type: "現所属"
+        description: "新たな秩序を目指す"
+    character_arc:
+      start: "能力者管理組織の幹部"
+      middle: "組織を裏切り、新秩序を目指す"
+      end: "主人公との対決で真実を知る"
+
+  # サブキャラクター
+  supporting_characters:
+    - name: "山田 美咲"
+      role: "親友/ヒロイン"
+      abilities: "水元素操作"
+      character_arc: "主人公の成長を支える存在"
+    - name: "佐藤 花子"
+      role: "妹"
+      abilities: "非能力者"
+      character_arc: "主人公の保護者としての成長"
+    - name: "鈴木 健一"
+      role: "能力者管理組織の教官"
+      abilities: "風元素操作"
+      character_arc: "主人公の指導者としての成長"
+
+  # キャラクター間の関係性
+  relationships:
+    - type: "友情"
+      between: ["佐藤翔太", "山田美咲"]
+      development: "幼馴染から戦友へ"
+    - type: "家族"
+      between: ["佐藤翔太", "佐藤花子"]
+      development: "保護者としての責任"
+    - type: "敵対"
+      between: ["佐藤翔太", "黒崎龍也"]
+      development: "対立から理解へ"
+
+  # キャラクター成長システム
+  character_development:
+    experience_system:
+      - level: 1
+        requirements: "能力の基礎習得"
+        rewards: "基本技の解放"
+      - level: 2
+        requirements: "中級技の習得"
+        rewards: "特殊技の解放"
+      - level: 3
+        requirements: "上級技の習得"
+        rewards: "究極技の解放"
+    relationship_system:
+      - level: "友好"
+        requirements: "共同戦闘経験"
+        rewards: "連携技の解放"
+      - level: "信頼"
+        requirements: "互いの過去を知る"
+        rewards: "合体技の解放"
+      - level: "絆"
+        requirements: "命を懸けた戦い"
+        rewards: "最終奥義の解放" 

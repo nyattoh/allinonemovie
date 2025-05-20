@@ -1,0 +1,212 @@
+# 章構成
+chapter_structure:
+  # 第1部：能力覚醒
+  part1:
+    chapters:
+      - number: 1
+        title: "日常の終わり"
+        type: "導入"
+        emotional_value: 0.3
+        scenes:
+          - type: "日常"
+            description: "普通の高校生活"
+            emotional_value: 0.2
+          - type: "転換点"
+            description: "能力の突然の覚醒"
+            emotional_value: 0.4
+        character_focus: "佐藤翔太"
+        plot_points:
+          - "能力の覚醒"
+          - "両親の死の暗示"
+
+      - number: 2
+        title: "能力者管理組織"
+        type: "展開"
+        emotional_value: 0.4
+        scenes:
+          - type: "説明"
+            description: "能力者管理組織の説明"
+            emotional_value: 0.3
+          - type: "出会い"
+            description: "教官との出会い"
+            emotional_value: 0.5
+        character_focus: "鈴木健一"
+        plot_points:
+          - "組織の存在"
+          - "訓練の開始"
+
+      - number: 3
+        title: "最初の戦い"
+        type: "アクション"
+        emotional_value: 0.6
+        scenes:
+          - type: "戦闘"
+            description: "能力者犯罪者との戦闘"
+            emotional_value: 0.7
+          - type: "成長"
+            description: "能力の制御を学ぶ"
+            emotional_value: 0.5
+        character_focus: "佐藤翔太"
+        plot_points:
+          - "戦闘経験"
+          - "能力の限界"
+
+  # 第2部：組織の陰謀
+  part2:
+    chapters:
+      - number: 4
+        title: "親友の危機"
+        type: "ドラマ"
+        emotional_value: 0.7
+        scenes:
+          - type: "対話"
+            description: "美咲との会話"
+            emotional_value: 0.6
+          - type: "危機"
+            description: "美咲が狙われる"
+            emotional_value: 0.8
+        character_focus: "山田美咲"
+        plot_points:
+          - "友情の試練"
+          - "保護者としての自覚"
+
+      - number: 5
+        title: "組織の裏切り"
+        type: "ミステリー"
+        emotional_value: 0.5
+        scenes:
+          - type: "発見"
+            description: "組織の陰謀を発見"
+            emotional_value: 0.6
+          - type: "対決"
+            description: "組織の幹部との対決"
+            emotional_value: 0.7
+        character_focus: "佐藤翔太"
+        plot_points:
+          - "組織の真実"
+          - "敵対者の存在"
+
+      - number: 6
+        title: "妹の誘拐"
+        type: "サスペンス"
+        emotional_value: 0.8
+        scenes:
+          - type: "事件"
+            description: "妹の拉致"
+            emotional_value: 0.9
+          - type: "決意"
+            description: "救出への決意"
+            emotional_value: 0.7
+        character_focus: "佐藤花子"
+        plot_points:
+          - "家族の危機"
+          - "決意の固まり"
+
+  # 第3部：最終決戦
+  part3:
+    chapters:
+      - number: 7
+        title: "黒崎龍也との対峙"
+        type: "アクション"
+        emotional_value: 0.9
+        scenes:
+          - type: "対決"
+            description: "初めての直接対決"
+            emotional_value: 1.0
+          - type: "真実"
+            description: "過去の真実を知る"
+            emotional_value: 0.8
+        character_focus: "黒崎龍也"
+        plot_points:
+          - "敵対者の正体"
+          - "過去の真実"
+
+      - number: 8
+        title: "能力の進化"
+        type: "成長"
+        emotional_value: 0.7
+        scenes:
+          - type: "覚醒"
+            description: "新たな能力の覚醒"
+            emotional_value: 0.8
+          - type: "訓練"
+            description: "新能力の制御"
+            emotional_value: 0.6
+        character_focus: "佐藤翔太"
+        plot_points:
+          - "能力進化"
+          - "戦力強化"
+
+      - number: 9
+        title: "最終決戦"
+        type: "クライマックス"
+        emotional_value: 1.0
+        scenes:
+          - type: "準備"
+            description: "決戦の準備"
+            emotional_value: 0.8
+          - type: "決戦"
+            description: "黒崎龍也との最終対決"
+            emotional_value: 1.0
+          - type: "決着"
+            description: "真実の解明と和解"
+            emotional_value: 0.9
+        character_focus: "全員"
+        plot_points:
+          - "最終決戦"
+          - "真実の解明"
+
+  # 章の依存関係
+  chapter_dependencies:
+    - from: 1
+      to: 2
+      type: "必須"
+    - from: 2
+      to: 3
+      type: "必須"
+    - from: 3
+      to: 4
+      type: "因果"
+    - from: 4
+      to: 5
+      type: "因果"
+    - from: 5
+      to: 6
+      type: "必須"
+    - from: 6
+      to: 7
+      type: "必須"
+    - from: 7
+      to: 8
+      type: "因果"
+    - from: 8
+      to: 9
+      type: "必須"
+
+  # 感情曲線の管理
+  emotional_management:
+    chapter_emotional_curve:
+      part1: [0.3, 0.4, 0.6]
+      part2: [0.7, 0.5, 0.8]
+      part3: [0.9, 0.7, 1.0]
+    emotional_balance:
+      high_points: [0.6, 0.8, 1.0]
+      low_points: [0.3, 0.5, 0.7]
+      recovery_points: [0.4, 0.7, 0.9]
+
+  # 章の目標タイプ
+  chapter_goals:
+    types:
+      - name: "謎解き"
+        probability: 0.3
+        emotional_impact: 0.6
+      - name: "葛藤"
+        probability: 0.4
+        emotional_impact: 0.8
+      - name: "決闘"
+        probability: 0.3
+        emotional_impact: 0.9
+    distribution:
+      part1: ["謎解き", "葛藤", "決闘"]
+      part2: ["葛藤", "謎解き", "決闘"]
+      part3: ["決闘", "葛藤", "決闘"] 

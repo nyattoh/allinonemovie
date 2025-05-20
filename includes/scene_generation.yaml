@@ -1,0 +1,196 @@
+# シーン詳細生成
+scene_generation:
+  # 対話シーン
+  dialogue_scenes:
+    character_triangle:
+      # 表面的発言
+      surface_dialogue:
+        protagonist:
+          style: "丁寧"
+          tone: "真面目"
+          vocabulary: "標準"
+        antagonist:
+          style: "威圧的"
+          tone: "冷たい"
+          vocabulary: "専門的"
+        supporting:
+          style: "親しみやすい"
+          tone: "温かい"
+          vocabulary: "日常的"
+
+      # 本音
+      inner_thoughts:
+        protagonist:
+          style: "率直"
+          tone: "不安"
+          vocabulary: "感情表現豊か"
+        antagonist:
+          style: "計算的"
+          tone: "執着"
+          vocabulary: "論理的"
+        supporting:
+          style: "共感的"
+          tone: "心配"
+          vocabulary: "優しい"
+
+      # 心理描写
+      psychological:
+        protagonist:
+          focus: "成長"
+          conflict: "責任"
+          development: "覚醒"
+        antagonist:
+          focus: "過去"
+          conflict: "理想"
+          development: "執着"
+        supporting:
+          focus: "関係"
+          conflict: "信頼"
+          development: "絆"
+
+  # アクションシーン
+  action_scenes:
+    # 時間軸パラメータ
+    timeline:
+      dialogue_ratio: 0.3  # 台詞の割合
+      action_ratio: 0.7    # アクションの割合
+      pacing:
+        slow: 0.2
+        medium: 0.5
+        fast: 0.3
+
+    # 戦闘シーン
+    battle:
+      phases:
+        - name: "開始"
+          duration: 0.2
+          emotional_value: 0.3
+        - name: "展開"
+          duration: 0.5
+          emotional_value: 0.7
+        - name: "決着"
+          duration: 0.3
+          emotional_value: 1.0
+
+      # 能力使用
+      ability_usage:
+        protagonist:
+          frequency: 0.4
+          power_scale: 0.7
+          limitations: ["精神力", "使用回数"]
+        antagonist:
+          frequency: 0.6
+          power_scale: 0.9
+          limitations: ["精神汚染", "寿命短縮"]
+
+  # シーン生成AIエージェント
+  scene_generation_agents:
+    # 対話生成エージェント
+    dialogue_agent:
+      triggers:
+        - type: "日常会話"
+          model: "GPT-4"
+          parameters:
+            temperature: 0.7
+            max_tokens: 150
+        - type: "感情表現"
+          model: "GPT-4"
+          parameters:
+            temperature: 0.8
+            max_tokens: 200
+        - type: "心理描写"
+          model: "GPT-4"
+          parameters:
+            temperature: 0.6
+            max_tokens: 250
+
+    # アクション生成エージェント
+    action_agent:
+      triggers:
+        - type: "戦闘シーン"
+          model: "GPT-4"
+          parameters:
+            temperature: 0.9
+            max_tokens: 300
+        - type: "能力描写"
+          model: "GPT-4"
+          parameters:
+            temperature: 0.8
+            max_tokens: 200
+        - type: "環境描写"
+          model: "GPT-4"
+          parameters:
+            temperature: 0.7
+            max_tokens: 150
+
+  # シーン品質管理
+  scene_quality_control:
+    # 感情値のバランス
+    emotional_balance:
+      check_points:
+        - scene_start: 0.3
+        - scene_middle: 0.6
+        - scene_end: 0.8
+      thresholds:
+        min_variation: 0.2
+        max_variation: 0.5
+
+    # 台詞の分配
+    dialogue_distribution:
+      protagonist: 0.4
+      antagonist: 0.3
+      supporting: 0.3
+
+    # シーンの長さ
+    scene_length:
+      min_words: 500
+      max_words: 2000
+      optimal_words: 1000
+
+  # シーン生成ルール
+  scene_generation_rules:
+    # 基本ルール
+    basic_rules:
+      - "感情値の急激な変化を避ける"
+      - "キャラクターの一貫性を保つ"
+      - "伏線の適切な配置"
+
+    # 特殊ルール
+    special_rules:
+      - "重要なシーンでは感情値を高めに設定"
+      - "クライマックスでは全キャラクターの感情を考慮"
+      - "伏線回収時は過去のシーンと整合性を確認"
+
+  # シーン生成テンプレート
+  scene_templates:
+    # 対話シーンテンプレート
+    dialogue_template:
+      structure:
+        - "状況説明"
+        - "キャラクターの感情"
+        - "対話"
+        - "心理描写"
+        - "結果"
+
+    # アクションシーンテンプレート
+    action_template:
+      structure:
+        - "状況説明"
+        - "能力使用"
+        - "戦闘描写"
+        - "結果"
+        - "影響"
+
+  # シーン生成パラメータ
+  scene_parameters:
+    # 感情値パラメータ
+    emotional_parameters:
+      base_value: 0.5
+      variation_range: 0.3
+      recovery_rate: 0.1
+
+    # 時間パラメータ
+    time_parameters:
+      scene_duration: 10  # 分
+      transition_time: 1  # 分
+      pacing_factor: 0.8 

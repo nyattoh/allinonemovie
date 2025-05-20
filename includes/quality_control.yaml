@@ -1,0 +1,185 @@
+# 品質管理
+quality_control:
+  # 矛盾検出アルゴリズム
+  contradiction_detection:
+    # 登場人物の行動基準
+    character_consistency:
+      check_points:
+        - "性格の一貫性"
+        - "能力の使用制限"
+        - "関係性の変化"
+      thresholds:
+        consistency_score: 0.8
+        deviation_limit: 0.2
+
+    # 時系列整合性
+    timeline_consistency:
+      check_points:
+        - "イベントの順序"
+        - "時間の経過"
+        - "場所の移動"
+      thresholds:
+        sequence_score: 0.9
+        time_gap_limit: 24  # 時間
+
+    # 伏線管理
+    foreshadowing_management:
+      check_points:
+        - "伏線の設置"
+        - "伏線の回収"
+        - "回収タイミング"
+      thresholds:
+        setup_score: 0.7
+        payoff_score: 0.8
+
+  # 感情曲線分析
+  emotional_curve_analysis:
+    # 感情値の追跡
+    emotional_tracking:
+      characters:
+        protagonist:
+          base_value: 0.5
+          variation_range: 0.3
+          recovery_rate: 0.1
+        antagonist:
+          base_value: 0.6
+          variation_range: 0.4
+          recovery_rate: 0.05
+        supporting:
+          base_value: 0.4
+          variation_range: 0.2
+          recovery_rate: 0.15
+
+    # 感情の相互作用
+    emotional_interactions:
+      types:
+        - "共鳴"
+        - "対立"
+        - "成長"
+      thresholds:
+        resonance_score: 0.7
+        conflict_score: 0.8
+        growth_score: 0.6
+
+  # レポート生成
+  report_generation:
+    # PDFレポート
+    pdf_report:
+      sections:
+        - "感情曲線分析"
+        - "矛盾検出結果"
+        - "伏線管理状況"
+      format:
+        template: "standard_report"
+        style: "professional"
+        language: "日本語"
+
+    # SVG出力
+    svg_output:
+      diagrams:
+        - "感情曲線グラフ"
+        - "時系列図"
+        - "関係性図"
+      style:
+        theme: "dark"
+        colors: ["#1a1a1a", "#4a4a4a", "#7a7a7a"]
+        fonts: ["Noto Sans JP", "sans-serif"]
+
+  # ダッシュボード機能
+  dashboard:
+    # 表示項目
+    display_items:
+      - "感情曲線"
+      - "矛盾検出"
+      - "伏線管理"
+      - "時系列"
+      - "関係性"
+
+    # 更新頻度
+    update_frequency:
+      real_time: true
+      interval: 5  # 分
+
+    # アラート設定
+    alerts:
+      emotional:
+        threshold: 0.8
+        type: "過剰変動"
+      contradiction:
+        threshold: 0.7
+        type: "矛盾検出"
+      foreshadowing:
+        threshold: 0.6
+        type: "伏線未回収"
+
+  # 自動化ポイント
+  automation_points:
+    # プロット点検出API
+    plot_point_detection:
+      api_endpoint: "https://api.plotpoints.example.com"
+      parameters:
+        sensitivity: 0.8
+        context_window: 1000
+      output:
+        format: "JSON"
+        fields: ["location", "time", "characters"]
+
+    # 台詞数制御
+    dialogue_control:
+      distribution:
+        protagonist: 0.4
+        antagonist: 0.3
+        supporting: 0.3
+      thresholds:
+        min_words: 100
+        max_words: 500
+
+    # 感情値アラート
+    emotional_alerts:
+      triggers:
+        - type: "急激な変化"
+          threshold: 0.5
+        - type: "不自然な変動"
+          threshold: 0.3
+      actions:
+        - "警告表示"
+        - "自動調整提案"
+
+    # 時代考証
+    historical_verification:
+      database: "historical_reference.db"
+      check_points:
+        - "時代背景"
+        - "文化風習"
+        - "技術水準"
+      thresholds:
+        accuracy: 0.9
+        consistency: 0.8
+
+  # 品質管理ルール
+  quality_rules:
+    # 基本ルール
+    basic_rules:
+      - "感情値の自然な変化を維持"
+      - "キャラクターの一貫性を確保"
+      - "伏線の適切な管理"
+
+    # 特殊ルール
+    special_rules:
+      - "重要なシーンの品質を優先"
+      - "クライマックスの整合性を重視"
+      - "読者体験を最適化"
+
+  # 品質管理パラメータ
+  quality_parameters:
+    # 感情値パラメータ
+    emotional_parameters:
+      base_value: 0.5
+      variation_range: 0.3
+      recovery_rate: 0.1
+
+    # 時間パラメータ
+    time_parameters:
+      check_interval: 5  # 分
+      update_frequency: 1  # 分
+      alert_delay: 0  # 分 

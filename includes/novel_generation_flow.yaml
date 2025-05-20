@@ -1,0 +1,130 @@
+# 小説自動生成フロー（エージェント連携・分岐・フィードバック付き）
+
+novel_generation_flow:
+  - step: 管理エージェント初期化
+    agent: takumi_nakamura_management_supervisor
+    action: "全体進行・初期指示・ジャンル/文体/品質要件の分岐設定"
+    next:
+      - plot_structure
+
+  - step: プロット構造設計
+    agent: keiko_sato_basic_writer
+    action: "物語の基本構造・キャラクター・プロット初期案作成"
+    reference: !include includes/plot_structure.yaml
+    next:
+      - chapter_structure
+
+  - step: 章構成設計
+    agent: keiko_sato_basic_writer
+    action: "章構成・シーン配置・感情曲線の設計"
+    reference: !include includes/chapter_structure.yaml
+    next:
+      - scene_generation
+
+  - step: シーン詳細生成
+    agent: keiko_sato_basic_writer
+    action: "各シーンの詳細な描写・対話・アクションの生成"
+    reference: !include includes/scene_generation.yaml
+    next:
+      - genre_branch
+
+  - step: ジャンル分岐
+    branch: true
+    condition: "ジャンルごとに専門エージェントへ分岐"
+    branches:
+      SFファンタジー:
+        agent: emily_chen_sf_fantasy_reader
+        action: "SF・ファンタジー要素の整合性・世界観チェック"
+        next:
+          - stylistics
+      ミステリー:
+        agent: seiichi_tanaka_mystery_reader
+        action: "ミステリー要素・伏線・論理性チェック"
+        next:
+          - stylistics
+      歴史小説:
+        agent: robert_harris_historical_fiction_reader
+        action: "歴史的整合性・時代感覚チェック"
+        next:
+          - stylistics
+      文学:
+        agent: sophia_moretti_literary_reader
+        action: "文学的テーマ・深み・間テクスト性チェック"
+        next:
+          - stylistics
+      ライトノベル:
+        agent: mirai_sato_lightnovel_reader
+        action: "キャラクター魅力度・テンポ・共感性チェック"
+        next:
+          - stylistics
+      デフォルト:
+        agent: jonathan_lee_reader
+        action: "一般読者目線での感情移入・分かりやすさ評価"
+        next:
+          - stylistics
+
+  - step: 文体・表現分岐
+    branch: true
+    condition: "文体・表現要件に応じて専門家エージェントへ分岐"
+    branches:
+      フラグメント:
+        agent: haruki_murakami_fragment_theorist
+        action: "フラグメント理論に基づく表現強化"
+        next:
+          - literary_giant
+      会話重視:
+        agent: taichi_yamada_dialogue_constructor
+        action: "自然な会話文・沈黙・間の活用"
+        next:
+          - literary_giant
+      実験的:
+        agent: yasutaka_tsutsui_experimental_expressionist
+        action: "実験的表現・形式破壊・ジャンル混淆"
+        next:
+          - literary_giant
+      論理重視:
+        agent: hiroshi_mori_logical_constructor
+        action: "論理的整合性・推論構造強化"
+        next:
+          - literary_giant
+      デフォルト:
+        agent: koji_suzuki_stylistics_researcher
+        action: "日本語文体・時制・無生物主語等の最適化"
+        next:
+          - literary_giant
+
+  - step: 文豪表現強化
+    agent: michael_thomas_literary_giant
+    action: "文学的表現・修辞・文体変化・語り手視点の最適化"
+    next:
+      - editor
+
+  - step: 編集・整合性チェック
+    agent: risa_yamaguchi_editor
+    action: "文章構成・冗長性・視点一貫性・論理性の最終チェック"
+    next:
+      - quality_control
+
+  - step: 品質管理・フィードバック
+    agent: management_agent
+    action: "全体品質・矛盾・要件充足度の評価。必要に応じて前段階へフィードバック（ループ）"
+    reference: !include includes/quality_control.yaml
+    feedback_loop:
+      - 条件: "品質基準未達・矛盾・要件不足"
+        return_to: editor
+      - 条件: "ジャンル/文体/表現要件の再調整必要"
+        return_to: genre_branch
+      - 条件: "感情曲線の不自然な変動"
+        return_to: chapter_structure
+      - 条件: "伏線の未回収・矛盾"
+        return_to: plot_structure
+    next:
+      - finalize
+
+  - step: 完成・出力
+    agent: takumi_nakamura_management_supervisor
+    action: "最終統合・成果物出力・ユーザーへの提示"
+    next: []
+
+# 各stepには分岐(branch)、フィードバック(feedback_loop)、次のstep(next)を明示
+# 必要に応じて分岐やループを追加・拡張可能 
