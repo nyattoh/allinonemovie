@@ -1,43 +1,48 @@
 # main_workflow.yaml
 nodes:
-  # ─── START ───
+  # ─── 開始 ───
   START:
-    next: ASK_Q
+    next: PLOT_PROPOSALS
 
-  # ─── 1. 初期ヒアリング ───
-  ASK_Q:
-    func: ask_initial_questions
-    branch: info_sufficient
+  # ─── 1. AIによるプロット案生成 ───
+  PLOT_PROPOSALS:
+    func: generate_plot_proposals
+    next: CHOOSE_PLOT
 
-  ASK_Q_DETAIL:
-    func: ask_additional_questions
-    next: ASK_Q
+  # ─── 2. プロット案選択＆ブラッシュアップ ───
+  CHOOSE_PLOT:
+    func: choose_plot
+    branch: plot_refine_needed
 
-  # ─── 2. 草案プロトタイプ生成 ───
+  PROPOSAL_REVIEW:
+    func: refine_plot
+    branch: plot_refine_needed
+
+  # ─── 3. 草案プロトタイプ生成 ───
   PROTOTYPE:
     func: prototype_generation
     next: REVIEW
 
-  # ─── 3. 草案レビュー ───
+  # ─── 4. 草案レビュー ───
   REVIEW:
     func: review_drafts
     branch: review_result
 
-  # ─── 4. 次の行き先を選択 ───
+  # ─── 5. 次の行き先選択 ───
   NEXT_STEP:
     branch: next_choice
 
-  # ─── 映像化フロー ───
+  # ─── 6a. 映像化フロー ───
   VIDEO_FLOW:
     func: video_flow_start
     next: END
 
-  # ─── 他の工程へ ───
+  # ─── 6b. 他の工程 ───
   OTHER_FLOW:
     func: other_flow
-    next: PROCESS1    # 続けるなら PROCESS1 へ、あるいは別ノードに
+    next: PROCESS1
 
-  # ─── 既存の 1～23 プロセス ───
+  # ─── 既存 PROCESS1～PROCESS23 ───
   PROCESS1:
     func: process_1
     next: PROCESS2
@@ -108,7 +113,7 @@ nodes:
     func: process_23
     next: PROCESS23_END
 
-  # ─── フェルミ推定・書き直しループ ───
+  # ─── フェルミ推定＆書き直しループ ───
   PROCESS23_END:
     func: fermi_evaluate
     branch: rewrite_needed
@@ -120,16 +125,16 @@ nodes:
     next: PROCESS23_END
     loop_max: 15
 
-  # ─── 最終終了 ───
+  # ─── 終了 ───
   END: {}
 
 branches:
-  # ヒアリング完了の分岐
-  info_sufficient:
-    yes: PROTOTYPE
-    no:  ASK_Q_DETAIL
+  # プロット案ブラッシュアップ完了分岐
+  plot_refine_needed:
+    yes: PROPOSAL_REVIEW
+    no:  PROTOTYPE
 
-  # 草案レビューの分岐
+  # 草案レビュー結果分岐
   review_result:
     ok:   NEXT_STEP
     redo: PROTOTYPE
@@ -140,7 +145,7 @@ branches:
     other: OTHER_FLOW
     continue: PROCESS1
 
-  # 書き直しループの分岐
+  # 書き直しループ分岐
   rewrite_needed:
     lt90: FEEDBACK
     gte90: END
