@@ -74,10 +74,8 @@ allinonemovie/
    cd allinonemovie
    ```
 
-2. **仮想環境の作成・依存パッケージのインストール**
+2. **依存パッケージのインストール**
    ```bash
-   python -m venv .venv
-   .venv\Scripts\activate
    pip install -r creative_flow/requirements.txt
    ```
 
@@ -94,7 +92,6 @@ allinonemovie/
 - 各フェーズで最低15回の推敲を推奨
 - Detarame要素（意外性）は整合性チェック必須
 - AIモデルごとのプロンプト最適化は自動
-- .venv/やキャッシュは.gitignoreで管理
 
 ## ライセンス
 
