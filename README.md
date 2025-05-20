@@ -15,11 +15,6 @@ AI × YAMLで小説・脚本・映像・画像生成を一気通貫で自動化�
 ```
 allinonemovie/
 ├── main.yaml                 # メイン設定・エントリーポイント
-├── creative_flow/            # ワークフロー・エンジン・依存パッケージ
-│   ├── main_workflow.yaml    # ワークフロー定義
-│   ├── workflow_engine.py    # 実行エンジン
-│   ├── requirements.txt      # 必要パッケージ
-│   └── user_prompt_questions.yaml # ユーザー入力テンプレ
 ├── includes/                 # テンプレ・知識ベース・エージェント定義
 │   ├── ai_prompt_tips/       # AIプロンプトTipsキャッシュ
 │   ├── agents_definition.yaml # エージェント・ペルソナ定義
@@ -32,6 +27,14 @@ allinonemovie/
 │   ├── image_generation_techniques.yaml # 画像生成技法集
 │   ├── t2v_doc.yaml         # Text-to-Video設定
 │   ├── i2v_doc.yaml         # Image-to-Video設定
+│   ├── examples_reference.yaml # 参考例集
+│   ├── detarame_script_template.yaml # 脚本テンプレ
+│   ├── dependency_diagram.yaml # 依存関係図
+│   ├── workflow_process.yaml # ワークフロープロセス定義
+│   ├── reusability_variables.yaml # 再利用可能な変数定義
+│   ├── novel_example.yaml    # 小説サンプル
+│   ├── movie_prompt_template.yaml # 映画プロンプトテンプレ
+│   ├── image2video_prompt_template.yaml # 画像→動画変換テンプレ
 │   └── ...（その他テンプレ・技法・チェックリスト等）
 └── README.md
 ```
@@ -48,8 +51,6 @@ allinonemovie/
 ## 主要ファイル
 
 - `main.yaml`：全体設定・エントリーポイント
-- `creative_flow/main_workflow.yaml`：ワークフロー定義
-- `creative_flow/workflow_engine.py`：実行エンジン
 - `includes/agents_definition.yaml`：エージェント・ペルソナ定義
 - `includes/complete_ai_content_collection.yaml`：AIプロンプト・モデル知識集
 - `includes/workflow_checklist.yaml`：各工程のチェックリスト
@@ -60,11 +61,14 @@ allinonemovie/
 - `includes/image_generation_techniques.yaml`：画像生成技法集
 - `includes/t2v_doc.yaml`：Text-to-Video設定
 - `includes/i2v_doc.yaml`：Image-to-Video設定
-
-## 依存パッケージ
-
-- openai>=1.0.0
-- PyYAML>=6.0
+- `includes/examples_reference.yaml`：参考例集
+- `includes/detarame_script_template.yaml`：脚本テンプレ
+- `includes/dependency_diagram.yaml`：依存関係図
+- `includes/workflow_process.yaml`：ワークフロープロセス定義
+- `includes/reusability_variables.yaml`：再利用可能な変数定義
+- `includes/novel_example.yaml`：小説サンプル
+- `includes/movie_prompt_template.yaml`：映画プロンプトテンプレ
+- `includes/image2video_prompt_template.yaml`：画像→動画変換テンプレ
 
 ## 使い方
 
@@ -74,16 +78,12 @@ allinonemovie/
    cd allinonemovie
    ```
 
-2. **依存パッケージのインストール**
-   ```bash
-   pip install -r creative_flow/requirements.txt
-   ```
+2. **main.yamlやincludes/内テンプレを編集**
 
-3. **main.yamlやincludes/内テンプレを編集**
-
-4. **パイプライン実行**
+3. **ワークフロー実行**
    ```bash
-   python creative_flow/workflow_engine.py
+   # ワークフローエンジンの実行方法は各環境に応じて異なります
+   # 詳細は各環境のドキュメントを参照してください
    ```
 
 ## 注意事項・推奨運用
