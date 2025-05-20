@@ -1,6 +1,52 @@
 # I2V（Image to Video）プロジェクト用テンプレート
 # このテンプレートは一気通貫映像プロンプトシステムの output_format_i2v: の内容を外部化したものです
 
+version: 1.0
+last_updated: 2024-03-20
+category: "image2video_prompt"
+
+template_structure:
+  - "input_image_description"
+  - "target_video_description"
+  - "camera_movement"
+  - "lighting"
+  - "style"
+  - "mood"
+
+parameters:
+  resolution:
+    default: "1920x1080"
+    options: ["1280x720", "1920x1080", "3840x2160"]
+  
+  fps:
+    default: 30
+    options: [24, 30, 60]
+  
+  style:
+    default: "realistic"
+    options: ["realistic", "cartoon", "anime", "3d"]
+  
+  lighting:
+    default: "natural"
+    options: ["natural", "dramatic", "soft", "hard"]
+  
+  camera_angle:
+    default: "medium"
+    options: ["close", "medium", "wide", "bird_eye"]
+
+rules:
+  - "入力画像の特徴を維持しながら、動きを自然に追加"
+  - "カメラの動きは滑らかで自然に"
+  - "照明はシーンの雰囲気に合わせて調整"
+  - "スタイルは一貫性を保つ"
+  - "感情や雰囲気を具体的に表現"
+
+optimization_tips:
+  - "高品質な映像生成には、詳細なシーン説明が重要"
+  - "カメラの動きは自然で滑らかに"
+  - "照明はシーンの雰囲気に合わせて調整"
+  - "スタイルは一貫性を保つ"
+
 structure: |
   # YAML output will follow this structure
   # Includes prompts (embedding character and style settings) and potentially references to generated assets.

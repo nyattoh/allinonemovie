@@ -40,9 +40,9 @@ knowledge_retrieval:
 # -------------------------------------------------------------------
 #  ワークフロー定義 (簡潔化)
 # -------------------------------------------------------------------
-execution_flow: !include includes/workflow_process.yaml
-agents:        !include includes/agents_definition.yaml
-variables:     !include includes/reusability_variables.yaml
+execution_flow: include includes/workflow_process.yaml
+agents:        include includes/agents_definition.yaml
+variables:     include includes/reusability_variables.yaml
 
 # -------------------------------------------------------------------
 #  小説 / 脚本 生成用パラレルキャラバン設定
@@ -65,8 +65,35 @@ writing_pipeline:
 
 # === デフォルト I/O テンプレ ===
 output_format:
-  i2v_template: includes/image2video_prompt_template.yaml
+  i2v:
+    prompt_template: "includes/image2video_prompt_template.yaml"
+    parameters: "includes/image2video_prompt_template.yaml"
   t2v_template: includes/text2video_prompt_template.yaml
+  i2v_processing:
+    description: "画像から映像への変換処理フロー"
+    steps:
+      - step: "画像の前処理"
+        template: includes/image_preprocessing_template.yaml
+      - step: "画像から映像への変換"
+        template: includes/image2video_conversion_template.yaml
+      - step: "出力映像の品質チェック"
+        template: includes/video_quality_check.yaml
+    parameters:
+      - name: "resolution"
+        default: "1920x1080"
+        options: ["1280x720", "1920x1080", "3840x2160"]
+      - name: "fps"
+        default: 30
+        options: [24, 30, 60]
+      - name: "style"
+        default: "realistic"
+        options: ["realistic", "cartoon", "anime", "3d"]
+      - name: "lighting"
+        default: "natural"
+        options: ["natural", "dramatic", "soft", "hard"]
+      - name: "camera_angle"
+        default: "medium"
+        options: ["close", "medium", "wide", "bird_eye"]
 
 # -------------------------------------------------------------------
 #  ストーリー生成設定
@@ -90,13 +117,91 @@ story_generation:
   # 品質管理
   quality_control: !include includes/quality_control.yaml
 
+  # 画像生成手法
+  image_generation_techniques: !include includes/image_generation_techniques.yaml
+
+  # ストーリー内容生成手法
+  story_content_techniques: !include includes/story_content_techniques.yaml
+
 # -------------------------------------------------------------------
-#  ランナー設定
+#  分岐フロー設定
 # -------------------------------------------------------------------
-#runner:
-#  script: run_pipeline.py
-#  entry:  main
-#  notes: |
-#    - run_pipeline.py は !include 展開 → knowledge_fetch → エージェント実行 → scoring →
-#      output フォルダ生成 まで一括実行する。
-#    - 追加ライブラリ: requests, beautifulsoup4 (knowledge_fetch 用)
+branching_flow:
+  novel_to_script:
+    description: "小説から脚本への変換フロー"
+    steps:
+      - step: "小説のプロットを脚本形式に変換"
+        template: includes/novel_to_script_template.yaml
+      - step: "脚本のシーン分割と台詞生成"
+        template: includes/script_scene_template.yaml
+      - step: "脚本の品質チェックと修正"
+        template: includes/script_quality_check.yaml
+
+  script_to_video:
+    description: "脚本から映像への変換フロー"
+    steps:
+      - step: "脚本を映像プロンプトに変換"
+        template: includes/script_to_video_prompt_template.yaml
+      - step: "映像生成パラメータの最適化"
+        template: includes/video_parameter_optimization.yaml
+      - step: "映像の品質チェックと修正"
+        template: includes/video_quality_check.yaml
+
+# -------------------------------------------------------------------
+#  映像プロンプト生成設定
+# -------------------------------------------------------------------
+video_prompt_generation:
+  description: "映像プロンプト生成の詳細なルールとパラメータ"
+  parameters:
+    - name: "resolution"
+      default: "1920x1080"
+      options: ["1280x720", "1920x1080", "3840x2160"]
+    - name: "fps"
+      default: 30
+      options: [24, 30, 60]
+    - name: "style"
+      default: "realistic"
+      options: ["realistic", "cartoon", "anime", "3d"]
+    - name: "lighting"
+      default: "natural"
+      options: ["natural", "dramatic", "soft", "hard"]
+    - name: "camera_angle"
+      default: "medium"
+      options: ["close", "medium", "wide", "bird_eye"]
+  rules:
+    - rule: "プロンプトは必ず映像の開始・中間・終了を明確に記述"
+    - rule: "カメラワーク・照明・音声の指示を含める"
+    - rule: "AIモデルごとの最適なパラメータを自動選択"
+
+# -------------------------------------------------------------------
+#  AIモデル最適化設定
+# -------------------------------------------------------------------
+ai_model_optimization:
+  description: "AIモデルごとの最適化と知識ベース連携"
+  models:
+    - model: "Gen-2"
+      prompt_template: "includes/gen2_prompt_template.yaml"
+      parameters: "includes/gen2_parameters.yaml"
+    - model: "Pika"
+      prompt_template: "includes/pika_prompt_template.yaml"
+      parameters: "includes/pika_parameters.yaml"
+    - model: "Fast SVD LCM"
+      prompt_template: "includes/fast_svd_lcm_prompt_template.yaml"
+      parameters: "includes/fast_svd_lcm_parameters.yaml"
+    - model: "CogVideoX-5B"
+      prompt_template: "includes/cogvideox_prompt_template.yaml"
+      parameters: "includes/cogvideox_parameters.yaml"
+    - model: "Vidu"
+      prompt_template: "includes/ai_model_knowledge/vidu_parameters.yaml"
+      parameters: "includes/ai_model_knowledge/vidu_parameters.yaml"
+    - model: "Kling"
+      prompt_template: "includes/ai_model_knowledge/kling_parameters.yaml"
+      parameters: "includes/ai_model_knowledge/kling_parameters.yaml"
+  knowledge_base:
+    update_frequency: "daily"
+    sources:
+      - "official_documentation"
+      - "community_tips"
+      - "academic_papers"
+    cache_folder: "includes/ai_model_knowledge/"
+

@@ -1,0 +1,44 @@
+version: 1.0
+last_updated: 2024-03-20
+model: "Vidu"
+
+parameters:
+  resolution:
+    default: "1920x1080"
+    options: ["1280x720", "1920x1080", "3840x2160"]
+  
+  fps:
+    default: 30
+    options: [24, 30, 60]
+  
+  style:
+    default: "realistic"
+    options: ["realistic", "cartoon", "anime", "3d"]
+  
+  lighting:
+    default: "natural"
+    options: ["natural", "dramatic", "soft", "hard"]
+  
+  camera_angle:
+    default: "medium"
+    options: ["close", "medium", "wide", "bird_eye"]
+
+prompt_template:
+  structure:
+    - "scene_description"
+    - "camera_movement"
+    - "lighting"
+    - "style"
+    - "mood"
+  
+  rules:
+    - "シーンの開始、中間、終了を明確に記述"
+    - "カメラワークと照明の指示を含める"
+    - "感情や雰囲気を具体的に表現"
+    - "AIモデル固有の最適なパラメータを使用"
+
+optimization_tips:
+  - "高品質な映像生成には、詳細なシーン説明が重要"
+  - "カメラの動きは自然で滑らかに"
+  - "照明はシーンの雰囲気に合わせて調整"
+  - "スタイルは一貫性を保つ" 
