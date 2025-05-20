@@ -1,12 +1,43 @@
+# main_workflow.yaml
 nodes:
+  # ─── START ───
   START:
-    next: PROCESS0
-  PROCESS0:
+    next: ASK_Q
+
+  # ─── 1. 初期ヒアリング ───
+  ASK_Q:
     func: ask_initial_questions
-    branch: plot_refine_needed
-  PLOT_REFINE:
-    func: plot_refine_dialogue
-    next: PROCESS1
+    branch: info_sufficient
+
+  ASK_Q_DETAIL:
+    func: ask_additional_questions
+    next: ASK_Q
+
+  # ─── 2. 草案プロトタイプ生成 ───
+  PROTOTYPE:
+    func: prototype_generation
+    next: REVIEW
+
+  # ─── 3. 草案レビュー ───
+  REVIEW:
+    func: review_drafts
+    branch: review_result
+
+  # ─── 4. 次の行き先を選択 ───
+  NEXT_STEP:
+    branch: next_choice
+
+  # ─── 映像化フロー ───
+  VIDEO_FLOW:
+    func: video_flow_start
+    next: END
+
+  # ─── 他の工程へ ───
+  OTHER_FLOW:
+    func: other_flow
+    next: PROCESS1    # 続けるなら PROCESS1 へ、あるいは別ノードに
+
+  # ─── 既存の 1～23 プロセス ───
   PROCESS1:
     func: process_1
     next: PROCESS2
@@ -76,6 +107,8 @@ nodes:
   PROCESS23:
     func: process_23
     next: PROCESS23_END
+
+  # ─── フェルミ推定・書き直しループ ───
   PROCESS23_END:
     func: fermi_evaluate
     branch: rewrite_needed
@@ -86,11 +119,28 @@ nodes:
     func: rewrite_cycle
     next: PROCESS23_END
     loop_max: 15
+
+  # ─── 最終終了 ───
   END: {}
+
 branches:
-  plot_refine_needed:
-    'yes': PLOT_REFINE
-    'no': PROCESS1
+  # ヒアリング完了の分岐
+  info_sufficient:
+    yes: PROTOTYPE
+    no:  ASK_Q_DETAIL
+
+  # 草案レビューの分岐
+  review_result:
+    ok:   NEXT_STEP
+    redo: PROTOTYPE
+
+  # NEXT_STEP での行き先選択
+  next_choice:
+    video: VIDEO_FLOW
+    other: OTHER_FLOW
+    continue: PROCESS1
+
+  # 書き直しループの分岐
   rewrite_needed:
     lt90: FEEDBACK
     gte90: END
