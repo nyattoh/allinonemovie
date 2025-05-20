@@ -33,7 +33,6 @@ allinonemovie/
 │   ├── t2v_doc.yaml         # Text-to-Video設定
 │   ├── i2v_doc.yaml         # Image-to-Video設定
 │   └── ...（その他テンプレ・技法・チェックリスト等）
-├── .gitignore
 └── README.md
 ```
 
@@ -65,10 +64,7 @@ allinonemovie/
 ## 依存パッケージ
 
 - openai>=1.0.0
-- python-dotenv>=1.0.0
 - PyYAML>=6.0
-- requests>=2.31.0
-- beautifulsoup4>=4.12.0
 
 ## 使い方
 
